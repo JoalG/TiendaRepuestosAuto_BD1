@@ -6,6 +6,6 @@
     [ID_Cliente] INT NOT NULL, 
     [ID_Contacto] INT NOT NULL, 
     CONSTRAINT [PK_Organizacion] PRIMARY KEY (CedulaJuridica), 
-    CONSTRAINT [FK_Cliente] FOREIGN KEY (ID_Cliente) REFERENCES [Cliente](ID_Cliente), 
-    CONSTRAINT [FK_Contacto] FOREIGN KEY (ID_Contacto,CedulaJuridica) REFERENCES [Contacto](ID_Contacto,CedulaJuridica)
+    CONSTRAINT [FK_Cliente_Organizacion] FOREIGN KEY (ID_Cliente) REFERENCES [Cliente](ID_Cliente), 
+    CONSTRAINT [FK_Contacto_Organizacion] FOREIGN KEY (ID_Contacto,CedulaJuridica) REFERENCES [Contacto](ID_Contacto,CedulaJuridica)
 )

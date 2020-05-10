@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Orden]
+(
+	[ID_Orden] INT NOT NULL PRIMARY KEY, 
+    [Fecha] DATE NOT NULL, 
+    [IVA] DECIMAL(19, 4) NOT NULL
+)
