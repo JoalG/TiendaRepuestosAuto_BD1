@@ -6,7 +6,7 @@
     [Detalle] NVARCHAR(300) NOT NULL, 
     [ID_FabricanteDeAutos] INT NOT NULL ,
     CONSTRAINT [FK_FabricanteDeAutos] FOREIGN KEY (ID_FabricanteDeAutos) REFERENCES [FabricanteDeAutos]([ID_FabricanteDeAutos]), 
-    CONSTRAINT [PK_TipoDeAutomovil] PRIMARY KEY ([ID_TipoDeAutomovil]),
+    CONSTRAINT [PK_TipoDeAutomovil] PRIMARY KEY (ID_TipoDeAutomovil,ID_FabricanteDeAutos),
     UNIQUE(Modelo,Año,ID_FabricanteDeAutos)
     
 )
