@@ -17,8 +17,8 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Parte()
         {
+            this.TipoDeAutomovils = new HashSet<TipoDeAutomovil>();
             this.Detalles = new HashSet<Detalle>();
-            this.ParteParaTipoDeAutomovils = new HashSet<ParteParaTipoDeAutomovil>();
             this.Proveidoes = new HashSet<Proveido>();
         }
     
@@ -27,11 +27,11 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public string Marca { get; set; }
         public int ID_FabricanteDePiezas { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle> Detalles { get; set; }
         public virtual FabricanteDePieza FabricanteDePieza { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ParteParaTipoDeAutomovil> ParteParaTipoDeAutomovils { get; set; }
+        public virtual ICollection<TipoDeAutomovil> TipoDeAutomovils { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detalle> Detalles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveido> Proveidoes { get; set; }
     }

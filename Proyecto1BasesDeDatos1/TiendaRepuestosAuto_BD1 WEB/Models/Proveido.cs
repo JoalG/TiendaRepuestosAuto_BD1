@@ -14,7 +14,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
     public partial class Proveido
     {
-        public int ID_Proveido { get; set; }
         public int C_Ganancia { get; set; }
         public decimal Precio { get; set; }
         public int ID_Proveedor { get; set; }

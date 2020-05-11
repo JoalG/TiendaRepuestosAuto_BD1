@@ -17,9 +17,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
+            this.TelefonoProveedors = new HashSet<TelefonoProveedor>();
             this.Detalles = new HashSet<Detalle>();
             this.Proveidoes = new HashSet<Proveido>();
-            this.TelefonoProveedors = new HashSet<TelefonoProveedor>();
         }
     
         public int ID_Proveedor { get; set; }
@@ -29,10 +29,10 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public string Ciudad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelefonoProveedor> TelefonoProveedors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle> Detalles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveido> Proveidoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TelefonoProveedor> TelefonoProveedors { get; set; }
     }
 }

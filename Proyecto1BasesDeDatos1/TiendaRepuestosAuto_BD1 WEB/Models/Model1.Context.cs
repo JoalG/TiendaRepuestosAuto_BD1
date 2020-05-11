@@ -28,20 +28,19 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Contacto> Contactoes { get; set; }
-        public virtual DbSet<Detalle> Detalles { get; set; }
         public virtual DbSet<EstadoDeCliente> EstadoDeClientes { get; set; }
         public virtual DbSet<FabricanteDeAuto> FabricanteDeAutos { get; set; }
         public virtual DbSet<FabricanteDePieza> FabricanteDePiezas { get; set; }
         public virtual DbSet<Orden> Ordens { get; set; }
         public virtual DbSet<Organizacion> Organizacions { get; set; }
         public virtual DbSet<Parte> Partes { get; set; }
-        public virtual DbSet<ParteParaTipoDeAutomovil> ParteParaTipoDeAutomovils { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<Proveedor> Proveedors { get; set; }
-        public virtual DbSet<Proveido> Proveidoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Telefono> Telefonoes { get; set; }
         public virtual DbSet<TelefonoProveedor> TelefonoProveedors { get; set; }
         public virtual DbSet<TipoDeAutomovil> TipoDeAutomovils { get; set; }
+        public virtual DbSet<Detalle> Detalles { get; set; }
+        public virtual DbSet<Proveido> Proveidoes { get; set; }
     }
 }
