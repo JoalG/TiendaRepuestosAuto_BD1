@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\joalg\OneDrive - Estudiantes ITCR\TEC\2020\1er Semestre\Bases de Datos 1\TiendaRepuestosAuto_BD1\Proyecto1BasesDeDatos1\TiendaRepuestosAuto_BD1 WEB\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Users\Joaquin\Documents\GitHub\TiendaRepuestosAuto_BD1\Proyecto1BasesDeDatos1\TiendaRepuestosAuto_BD1 WEB\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
