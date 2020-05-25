@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TiendaRepuestosAuto_BD1_WEB.Models
+namespace WebApp_TiendaRepuestosAuto.Models
 {
     using System;
     using System.Data.Entity;
@@ -28,22 +28,22 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         }
     
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Contacto> Contactoes { get; set; }
-        public virtual DbSet<EstadoDeCliente> EstadoDeClientes { get; set; }
-        public virtual DbSet<FabricanteDeAuto> FabricanteDeAutos { get; set; }
-        public virtual DbSet<FabricanteDePieza> FabricanteDePiezas { get; set; }
-        public virtual DbSet<Orden> Ordens { get; set; }
-        public virtual DbSet<Organizacion> Organizacions { get; set; }
-        public virtual DbSet<Parte> Partes { get; set; }
-        public virtual DbSet<Persona> Personas { get; set; }
-        public virtual DbSet<Proveedor> Proveedors { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Telefono> Telefonoes { get; set; }
-        public virtual DbSet<TelefonoProveedor> TelefonoProveedors { get; set; }
-        public virtual DbSet<TipoDeAutomovil> TipoDeAutomovils { get; set; }
-        public virtual DbSet<Detalle> Detalles { get; set; }
-        public virtual DbSet<Proveido> Proveidoes { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Contacto> Contacto { get; set; }
+        public virtual DbSet<Detalle> Detalle { get; set; }
+        public virtual DbSet<EstadoDeCliente> EstadoDeCliente { get; set; }
+        public virtual DbSet<FabricanteDeAutos> FabricanteDeAutos { get; set; }
+        public virtual DbSet<FabricanteDePiezas> FabricanteDePiezas { get; set; }
+        public virtual DbSet<Orden> Orden { get; set; }
+        public virtual DbSet<Organizacion> Organizacion { get; set; }
+        public virtual DbSet<Parte> Parte { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Proveido> Proveido { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Telefono> Telefono { get; set; }
+        public virtual DbSet<TelefonoProveedor> TelefonoProveedor { get; set; }
+        public virtual DbSet<TipoDeAutomovil> TipoDeAutomovil { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -163,31 +163,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("ID_ClientePersona", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddPersonaOnly", cedulaParameter, nombreParameter, iD_ClientePersonaParameter);
-        }
-    
-        public virtual int spAddClienteAndPersona(Nullable<int> cedula, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente)
-        {
-            var cedulaParameter = cedula.HasValue ?
-                new ObjectParameter("Cedula", cedula) :
-                new ObjectParameter("Cedula", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var ciudadParameter = ciudad != null ?
-                new ObjectParameter("Ciudad", ciudad) :
-                new ObjectParameter("Ciudad", typeof(string));
-    
-            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
-                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
-                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddClienteAndPersona", cedulaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter);
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -404,13 +404,6 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="spAddClienteAndPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
-          <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
-          <Parameter Name="Ciudad" Type="nvarchar" Mode="In" />
-          <Parameter Name="ID_EstadoDeCliente" Type="int" Mode="In" />
-        </Function>
         <Function Name="spAddPersonaOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -504,7 +497,8 @@
             <End Role="TelefonoProveedor" EntitySet="TelefonoProveedor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaRepuestosAuto_BD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -522,10 +516,10 @@
           <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_EstadoDeCliente" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Organizacions" Relationship="Self.FK_Cliente_Organizacion" FromRole="Cliente" ToRole="Organizacion" />
-          <NavigationProperty Name="Personas" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
+          <NavigationProperty Name="Organizacion" Relationship="Self.FK_Cliente_Organizacion" FromRole="Cliente" ToRole="Organizacion" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
           <NavigationProperty Name="EstadoDeCliente" Relationship="Self.FK_EstadoDeCliente" FromRole="Cliente" ToRole="EstadoDeCliente" />
-          <NavigationProperty Name="Ordens" Relationship="Self.FK_Orden_Cliente" FromRole="Cliente" ToRole="Orden" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK_Orden_Cliente" FromRole="Cliente" ToRole="Orden" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -537,8 +531,22 @@
           <Property Name="Telefono" Type="Int64" Nullable="false" />
           <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CedulaJuridica" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Organizacions" Relationship="Self.FK_Contacto_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
-          <NavigationProperty Name="Organizacion" Relationship="Self.FK_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
+          <NavigationProperty Name="Organizacion" Relationship="Self.FK_Contacto_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
+          <NavigationProperty Name="Organizacion1" Relationship="Self.FK_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
+        </EntityType>
+        <EntityType Name="Detalle">
+          <Key>
+            <PropertyRef Name="ID_Detalle" />
+            <PropertyRef Name="ID_Orden" />
+          </Key>
+          <Property Name="ID_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="ID_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="ID_Parte" Type="Int32" Nullable="false" />
+          <Property Name="ID_Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK_Orden_Detalle" FromRole="Detalle" ToRole="Orden" />
+          <NavigationProperty Name="Parte" Relationship="Self.FK_Parte_Detalle" FromRole="Detalle" ToRole="Parte" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Proveedor_Detalle" FromRole="Detalle" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="EstadoDeCliente">
           <Key>
@@ -546,23 +554,23 @@
           </Key>
           <Property Name="ID_EstadoDeCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK_EstadoDeCliente" FromRole="EstadoDeCliente" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_EstadoDeCliente" FromRole="EstadoDeCliente" ToRole="Cliente" />
         </EntityType>
-        <EntityType Name="FabricanteDeAuto">
+        <EntityType Name="FabricanteDeAutos">
           <Key>
             <PropertyRef Name="ID_FabricanteDeAutos" />
           </Key>
           <Property Name="ID_FabricanteDeAutos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TipoDeAutomovils" Relationship="Self.FK_FabricanteDeAutos" FromRole="FabricanteDeAutos" ToRole="TipoDeAutomovil" />
+          <NavigationProperty Name="TipoDeAutomovil" Relationship="Self.FK_FabricanteDeAutos" FromRole="FabricanteDeAutos" ToRole="TipoDeAutomovil" />
         </EntityType>
-        <EntityType Name="FabricanteDePieza">
+        <EntityType Name="FabricanteDePiezas">
           <Key>
             <PropertyRef Name="ID_FabricanteDePiezas" />
           </Key>
           <Property Name="ID_FabricanteDePiezas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Partes" Relationship="Self.FK_Parte_FabricanteDePiezas" FromRole="FabricanteDePiezas" ToRole="Parte" />
+          <NavigationProperty Name="Parte" Relationship="Self.FK_Parte_FabricanteDePiezas" FromRole="FabricanteDePiezas" ToRole="Parte" />
         </EntityType>
         <EntityType Name="Orden">
           <Key>
@@ -573,7 +581,7 @@
           <Property Name="IVA" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Orden_Cliente" FromRole="Orden" ToRole="Cliente" />
-          <NavigationProperty Name="Detalles" Relationship="TiendaRepuestosAuto_BD1Model.FK_Orden_Detalle" FromRole="Orden" ToRole="Detalle" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK_Orden_Detalle" FromRole="Orden" ToRole="Detalle" />
         </EntityType>
         <EntityType Name="Organizacion">
           <Key>
@@ -585,7 +593,7 @@
           <Property Name="ID_Contacto" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Organizacion" FromRole="Organizacion" ToRole="Cliente" />
           <NavigationProperty Name="Contacto" Relationship="Self.FK_Contacto_Organizacion" FromRole="Organizacion" ToRole="Contacto" />
-          <NavigationProperty Name="Contactoes" Relationship="Self.FK_Organizacion" FromRole="Organizacion" ToRole="Contacto" />
+          <NavigationProperty Name="Contacto1" Relationship="Self.FK_Organizacion" FromRole="Organizacion" ToRole="Contacto" />
         </EntityType>
         <EntityType Name="Parte">
           <Key>
@@ -595,10 +603,10 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_FabricanteDePiezas" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FabricanteDePieza" Relationship="Self.FK_Parte_FabricanteDePiezas" FromRole="Parte" ToRole="FabricanteDePiezas" />
-          <NavigationProperty Name="TipoDeAutomovils" Relationship="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil" FromRole="Parte" ToRole="TipoDeAutomovil" />
-          <NavigationProperty Name="Detalles" Relationship="TiendaRepuestosAuto_BD1Model.FK_Parte_Detalle" FromRole="Parte" ToRole="Detalle" />
-          <NavigationProperty Name="Proveidoes" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveido_Parte" FromRole="Parte" ToRole="Proveido" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK_Parte_Detalle" FromRole="Parte" ToRole="Detalle" />
+          <NavigationProperty Name="FabricanteDePiezas" Relationship="Self.FK_Parte_FabricanteDePiezas" FromRole="Parte" ToRole="FabricanteDePiezas" />
+          <NavigationProperty Name="Proveido" Relationship="Self.FK_Proveido_Parte" FromRole="Parte" ToRole="Proveido" />
+          <NavigationProperty Name="TipoDeAutomovil" Relationship="Self.ParteParaTipoDeAutomovil" FromRole="Parte" ToRole="TipoDeAutomovil" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -608,7 +616,7 @@
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_ClientePersona" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Persona" FromRole="Persona" ToRole="Cliente" />
-          <NavigationProperty Name="Telefonoes" Relationship="Self.FK_Telefono_Persona" FromRole="Persona" ToRole="Telefono" />
+          <NavigationProperty Name="Telefono" Relationship="Self.FK_Telefono_Persona" FromRole="Persona" ToRole="Telefono" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -619,11 +627,23 @@
           <Property Name="Dirección" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NombreContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Ciudad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TelefonoProveedors" Relationship="Self.FK_TelefonoProveedor_Proveedor" FromRole="Proveedor" ToRole="TelefonoProveedor" />
-          <NavigationProperty Name="Detalles" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveedor_Detalle" FromRole="Proveedor" ToRole="Detalle" />
-          <NavigationProperty Name="Proveidoes" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveido_Proveedor" FromRole="Proveedor" ToRole="Proveido" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK_Proveedor_Detalle" FromRole="Proveedor" ToRole="Detalle" />
+          <NavigationProperty Name="Proveido" Relationship="Self.FK_Proveido_Proveedor" FromRole="Proveedor" ToRole="Proveido" />
+          <NavigationProperty Name="TelefonoProveedor" Relationship="Self.FK_TelefonoProveedor_Proveedor" FromRole="Proveedor" ToRole="TelefonoProveedor" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="Proveido">
+          <Key>
+            <PropertyRef Name="ID_Proveedor" />
+            <PropertyRef Name="ID_Parte" />
+          </Key>
+          <Property Name="C_Ganancia" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ID_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="ID_Parte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parte" Relationship="Self.FK_Proveido_Parte" FromRole="Proveido" ToRole="Parte" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Proveido_Proveedor" FromRole="Proveido" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -661,8 +681,8 @@
           <Property Name="Año" Type="Int32" Nullable="false" />
           <Property Name="Detalle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_FabricanteDeAutos" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FabricanteDeAuto" Relationship="Self.FK_FabricanteDeAutos" FromRole="TipoDeAutomovil" ToRole="FabricanteDeAutos" />
-          <NavigationProperty Name="Partes" Relationship="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil" FromRole="TipoDeAutomovil" ToRole="Parte" />
+          <NavigationProperty Name="FabricanteDeAutos" Relationship="Self.FK_FabricanteDeAutos" FromRole="TipoDeAutomovil" ToRole="FabricanteDeAutos" />
+          <NavigationProperty Name="Parte" Relationship="Self.ParteParaTipoDeAutomovil" FromRole="TipoDeAutomovil" ToRole="Parte" />
         </EntityType>
         <Association Name="FK_Cliente_Organizacion">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
@@ -738,8 +758,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orden_Detalle">
+          <End Role="Orden" Type="Self.Orden" Multiplicity="1" />
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="ID_Orden" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parte_Detalle">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ID_Parte" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Parte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedor_Detalle">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID_Proveedor" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FabricanteDeAutos">
-          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAuto" Multiplicity="1" />
+          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAutos" Multiplicity="1" />
           <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDeAutos">
@@ -751,7 +807,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parte_FabricanteDePiezas">
-          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePieza" Multiplicity="1" />
+          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePiezas" Multiplicity="1" />
           <End Role="Parte" Type="Self.Parte" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDePiezas">
@@ -759,6 +815,18 @@
             </Principal>
             <Dependent Role="Parte">
               <PropertyRef Name="ID_FabricanteDePiezas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveido_Parte">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ID_Parte" />
+            </Principal>
+            <Dependent Role="Proveido">
+              <PropertyRef Name="ID_Parte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -774,6 +842,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Proveido_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID_Proveedor" />
+            </Principal>
+            <Dependent Role="Proveido">
+              <PropertyRef Name="ID_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TelefonoProveedor_Proveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="TelefonoProveedor" Type="Self.TelefonoProveedor" Multiplicity="*" />
@@ -786,87 +866,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ParteParaTipoDeAutomovil">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="*" />
+          <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="TiendaRepuestosAuto_BD1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
-          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="Contactoes" EntityType="Self.Contacto" />
-          <EntitySet Name="EstadoDeClientes" EntityType="Self.EstadoDeCliente" />
-          <EntitySet Name="FabricanteDeAutos" EntityType="Self.FabricanteDeAuto" />
-          <EntitySet Name="FabricanteDePiezas" EntityType="Self.FabricanteDePieza" />
-          <EntitySet Name="Ordens" EntityType="Self.Orden" />
-          <EntitySet Name="Organizacions" EntityType="Self.Organizacion" />
-          <EntitySet Name="Partes" EntityType="Self.Parte" />
-          <EntitySet Name="Personas" EntityType="Self.Persona" />
-          <EntitySet Name="Proveedors" EntityType="Self.Proveedor" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Telefonoes" EntityType="Self.Telefono" />
-          <EntitySet Name="TelefonoProveedors" EntityType="Self.TelefonoProveedor" />
-          <EntitySet Name="TipoDeAutomovils" EntityType="Self.TipoDeAutomovil" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" />
+          <EntitySet Name="Detalle" EntityType="Self.Detalle" />
+          <EntitySet Name="EstadoDeCliente" EntityType="Self.EstadoDeCliente" />
+          <EntitySet Name="FabricanteDeAutos" EntityType="Self.FabricanteDeAutos" />
+          <EntitySet Name="FabricanteDePiezas" EntityType="Self.FabricanteDePiezas" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" />
+          <EntitySet Name="Organizacion" EntityType="Self.Organizacion" />
+          <EntitySet Name="Parte" EntityType="Self.Parte" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="Proveido" EntityType="Self.Proveido" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" />
+          <EntitySet Name="TelefonoProveedor" EntityType="Self.TelefonoProveedor" />
+          <EntitySet Name="TipoDeAutomovil" EntityType="Self.TipoDeAutomovil" />
           <AssociationSet Name="FK_Cliente_Organizacion" Association="Self.FK_Cliente_Organizacion">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Organizacion" EntitySet="Organizacions" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Organizacion" EntitySet="Organizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_EstadoDeCliente" Association="Self.FK_EstadoDeCliente">
-            <End Role="EstadoDeCliente" EntitySet="EstadoDeClientes" />
-            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="EstadoDeCliente" EntitySet="EstadoDeCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Orden_Cliente" Association="Self.FK_Orden_Cliente">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Orden" EntitySet="Ordens" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Orden" EntitySet="Orden" />
           </AssociationSet>
           <AssociationSet Name="FK_Contacto_Organizacion" Association="Self.FK_Contacto_Organizacion">
-            <End Role="Contacto" EntitySet="Contactoes" />
-            <End Role="Organizacion" EntitySet="Organizacions" />
+            <End Role="Contacto" EntitySet="Contacto" />
+            <End Role="Organizacion" EntitySet="Organizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Organizacion" Association="Self.FK_Organizacion">
-            <End Role="Organizacion" EntitySet="Organizacions" />
-            <End Role="Contacto" EntitySet="Contactoes" />
+            <End Role="Organizacion" EntitySet="Organizacion" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Detalle" Association="Self.FK_Orden_Detalle">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parte_Detalle" Association="Self.FK_Parte_Detalle">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_Detalle" Association="Self.FK_Proveedor_Detalle">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Detalle" EntitySet="Detalle" />
           </AssociationSet>
           <AssociationSet Name="FK_FabricanteDeAutos" Association="Self.FK_FabricanteDeAutos">
             <End Role="FabricanteDeAutos" EntitySet="FabricanteDeAutos" />
-            <End Role="TipoDeAutomovil" EntitySet="TipoDeAutomovils" />
+            <End Role="TipoDeAutomovil" EntitySet="TipoDeAutomovil" />
           </AssociationSet>
           <AssociationSet Name="FK_Parte_FabricanteDePiezas" Association="Self.FK_Parte_FabricanteDePiezas">
             <End Role="FabricanteDePiezas" EntitySet="FabricanteDePiezas" />
-            <End Role="Parte" EntitySet="Partes" />
+            <End Role="Parte" EntitySet="Parte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveido_Parte" Association="Self.FK_Proveido_Parte">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="Proveido" EntitySet="Proveido" />
           </AssociationSet>
           <AssociationSet Name="FK_Telefono_Persona" Association="Self.FK_Telefono_Persona">
-            <End Role="Persona" EntitySet="Personas" />
-            <End Role="Telefono" EntitySet="Telefonoes" />
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Telefono" EntitySet="Telefono" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveido_Proveedor" Association="Self.FK_Proveido_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Proveido" EntitySet="Proveido" />
           </AssociationSet>
           <AssociationSet Name="FK_TelefonoProveedor_Proveedor" Association="Self.FK_TelefonoProveedor_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedors" />
-            <End Role="TelefonoProveedor" EntitySet="TelefonoProveedors" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="TelefonoProveedor" EntitySet="TelefonoProveedor" />
           </AssociationSet>
-          <AssociationSet Name="ParteParaTipoDeAutomovil" Association="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil">
-            <End Role="Parte" EntitySet="Partes" />
-            <End Role="TipoDeAutomovil" EntitySet="TipoDeAutomovils" />
-          </AssociationSet>
-          <EntitySet Name="Detalles" EntityType="TiendaRepuestosAuto_BD1Model.Detalle" />
-          <AssociationSet Name="FK_Orden_Detalle" Association="TiendaRepuestosAuto_BD1Model.FK_Orden_Detalle">
-            <End Role="Orden" EntitySet="Ordens" />
-            <End Role="Detalle" EntitySet="Detalles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Parte_Detalle" Association="TiendaRepuestosAuto_BD1Model.FK_Parte_Detalle">
-            <End Role="Parte" EntitySet="Partes" />
-            <End Role="Detalle" EntitySet="Detalles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Detalle" Association="TiendaRepuestosAuto_BD1Model.FK_Proveedor_Detalle">
-            <End Role="Proveedor" EntitySet="Proveedors" />
-            <End Role="Detalle" EntitySet="Detalles" />
-          </AssociationSet>
-          <EntitySet Name="Proveidoes" EntityType="TiendaRepuestosAuto_BD1Model.Proveido" />
-          <AssociationSet Name="FK_Proveido_Parte" Association="TiendaRepuestosAuto_BD1Model.FK_Proveido_Parte">
-            <End Role="Parte" EntitySet="Partes" />
-            <End Role="Proveido" EntitySet="Proveidoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveido_Proveedor" Association="TiendaRepuestosAuto_BD1Model.FK_Proveido_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedors" />
-            <End Role="Proveido" EntitySet="Proveidoes" />
+          <AssociationSet Name="ParteParaTipoDeAutomovil" Association="Self.ParteParaTipoDeAutomovil">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="TipoDeAutomovil" EntitySet="TipoDeAutomovil" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -903,104 +987,7 @@
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="ID_ClientePersona" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spAddClienteAndPersona">
-            <Parameter Name="Cedula" Mode="In" Type="Int32" />
-            <Parameter Name="nombre" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-            <Parameter Name="Ciudad" Mode="In" Type="String" />
-            <Parameter Name="ID_EstadoDeCliente" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
-        <Association Name="ParteParaTipoDeAutomovil">
-          <End Type="TiendaRepuestosAuto_BD1Model.Parte" Role="Parte" Multiplicity="*" />
-          <End Type="TiendaRepuestosAuto_BD1Model.TipoDeAutomovil" Role="TipoDeAutomovil" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Detalle">
-          <Key>
-            <PropertyRef Name="ID_Detalle" />
-            <PropertyRef Name="ID_Orden" />
-          </Key>
-          <Property Name="ID_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="ID_Proveedor" Type="Int32" Nullable="false" />
-          <Property Name="ID_Parte" Type="Int32" Nullable="false" />
-          <Property Name="ID_Orden" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Orden" Relationship="TiendaRepuestosAuto_BD1Model.FK_Orden_Detalle" FromRole="Detalle" ToRole="Orden" />
-          <NavigationProperty Name="Parte" Relationship="TiendaRepuestosAuto_BD1Model.FK_Parte_Detalle" FromRole="Detalle" ToRole="Parte" />
-          <NavigationProperty Name="Proveedor" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveedor_Detalle" FromRole="Detalle" ToRole="Proveedor" />
-        </EntityType>
-        <Association Name="FK_Orden_Detalle">
-          <End Type="TiendaRepuestosAuto_BD1Model.Orden" Role="Orden" Multiplicity="1" />
-          <End Type="TiendaRepuestosAuto_BD1Model.Detalle" Role="Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orden">
-              <PropertyRef Name="ID_Orden" />
-            </Principal>
-            <Dependent Role="Detalle">
-              <PropertyRef Name="ID_Orden" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Parte_Detalle">
-          <End Type="TiendaRepuestosAuto_BD1Model.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="TiendaRepuestosAuto_BD1Model.Detalle" Role="Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ID_Parte" />
-            </Principal>
-            <Dependent Role="Detalle">
-              <PropertyRef Name="ID_Parte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Detalle">
-          <End Type="TiendaRepuestosAuto_BD1Model.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="TiendaRepuestosAuto_BD1Model.Detalle" Role="Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ID_Proveedor" />
-            </Principal>
-            <Dependent Role="Detalle">
-              <PropertyRef Name="ID_Proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Proveido">
-          <Key>
-            <PropertyRef Name="ID_Proveedor" />
-            <PropertyRef Name="ID_Parte" />
-          </Key>
-          <Property Name="C_Ganancia" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="ID_Proveedor" Type="Int32" Nullable="false" />
-          <Property Name="ID_Parte" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Parte" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveido_Parte" FromRole="Proveido" ToRole="Parte" />
-          <NavigationProperty Name="Proveedor" Relationship="TiendaRepuestosAuto_BD1Model.FK_Proveido_Proveedor" FromRole="Proveido" ToRole="Proveedor" />
-        </EntityType>
-        <Association Name="FK_Proveido_Parte">
-          <End Type="TiendaRepuestosAuto_BD1Model.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="TiendaRepuestosAuto_BD1Model.Proveido" Role="Proveido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ID_Parte" />
-            </Principal>
-            <Dependent Role="Proveido">
-              <PropertyRef Name="ID_Parte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveido_Proveedor">
-          <End Type="TiendaRepuestosAuto_BD1Model.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="TiendaRepuestosAuto_BD1Model.Proveido" Role="Proveido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ID_Proveedor" />
-            </Principal>
-            <Dependent Role="Proveido">
-              <PropertyRef Name="ID_Proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -1025,7 +1012,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
+          <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
@@ -1035,7 +1022,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contactoes">
+          <EntitySetMapping Name="Contacto">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Contacto">
               <MappingFragment StoreEntitySet="Contacto">
                 <ScalarProperty Name="ID_Contacto" ColumnName="ID_Contacto" />
@@ -1046,7 +1033,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EstadoDeClientes">
+          <EntitySetMapping Name="Detalle">
+            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Detalle">
+              <MappingFragment StoreEntitySet="Detalle">
+                <ScalarProperty Name="ID_Detalle" ColumnName="ID_Detalle" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+                <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
+                <ScalarProperty Name="ID_Orden" ColumnName="ID_Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoDeCliente">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.EstadoDeCliente">
               <MappingFragment StoreEntitySet="EstadoDeCliente">
                 <ScalarProperty Name="ID_EstadoDeCliente" ColumnName="ID_EstadoDeCliente" />
@@ -1055,7 +1053,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FabricanteDeAutos">
-            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.FabricanteDeAuto">
+            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.FabricanteDeAutos">
               <MappingFragment StoreEntitySet="FabricanteDeAutos">
                 <ScalarProperty Name="ID_FabricanteDeAutos" ColumnName="ID_FabricanteDeAutos" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -1063,14 +1061,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FabricanteDePiezas">
-            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.FabricanteDePieza">
+            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.FabricanteDePiezas">
               <MappingFragment StoreEntitySet="FabricanteDePiezas">
                 <ScalarProperty Name="ID_FabricanteDePiezas" ColumnName="ID_FabricanteDePiezas" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ordens">
+          <EntitySetMapping Name="Orden">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Orden">
               <MappingFragment StoreEntitySet="Orden">
                 <ScalarProperty Name="ID_Orden" ColumnName="ID_Orden" />
@@ -1080,7 +1078,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Organizacions">
+          <EntitySetMapping Name="Organizacion">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Organizacion">
               <MappingFragment StoreEntitySet="Organizacion">
                 <ScalarProperty Name="CedulaJuridica" ColumnName="CedulaJuridica" />
@@ -1090,7 +1088,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Partes">
+          <EntitySetMapping Name="Parte">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Parte">
               <MappingFragment StoreEntitySet="Parte">
                 <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
@@ -1100,7 +1098,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Personas">
+          <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Persona">
               <MappingFragment StoreEntitySet="Persona">
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
@@ -1109,7 +1107,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Proveedors">
+          <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
                 <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
@@ -1120,8 +1118,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Proveido">
+            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Proveido">
+              <MappingFragment StoreEntitySet="Proveido">
+                <ScalarProperty Name="C_Ganancia" ColumnName="%Ganancia" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+                <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.sysdiagram">
+            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1131,7 +1139,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Telefonoes">
+          <EntitySetMapping Name="Telefono">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Telefono">
               <MappingFragment StoreEntitySet="Telefono">
                 <ScalarProperty Name="ID_Telefono" ColumnName="ID_Telefono" />
@@ -1140,7 +1148,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TelefonoProveedors">
+          <EntitySetMapping Name="TelefonoProveedor">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.TelefonoProveedor">
               <MappingFragment StoreEntitySet="TelefonoProveedor">
                 <ScalarProperty Name="ID_TelefonoProveedor" ColumnName="ID_TelefonoProveedor" />
@@ -1149,7 +1157,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipoDeAutomovils">
+          <EntitySetMapping Name="TipoDeAutomovil">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.TipoDeAutomovil">
               <MappingFragment StoreEntitySet="TipoDeAutomovil">
                 <ScalarProperty Name="ID_TipoDeAutomovil" ColumnName="ID_TipoDeAutomovil" />
@@ -1161,35 +1169,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="ParteParaTipoDeAutomovil" TypeName="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil" StoreEntitySet="ParteParaTipoDeAutomovil">
-            <EndProperty Name="TipoDeAutomovil">
-              <ScalarProperty Name="ID_FabricanteDeAutos" ColumnName="ID_FabricanteDeAutos" />
-              <ScalarProperty Name="ID_TipoDeAutomovil" ColumnName="ID_TipoDeAutomovil" />
-            </EndProperty>
             <EndProperty Name="Parte">
               <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
             </EndProperty>
+            <EndProperty Name="TipoDeAutomovil">
+              <ScalarProperty Name="ID_TipoDeAutomovil" ColumnName="ID_TipoDeAutomovil" />
+              <ScalarProperty Name="ID_FabricanteDeAutos" ColumnName="ID_FabricanteDeAutos" />
+            </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Detalles">
-            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Detalle">
-              <MappingFragment StoreEntitySet="Detalle">
-                <ScalarProperty Name="ID_Orden" ColumnName="ID_Orden" />
-                <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
-                <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="ID_Detalle" ColumnName="ID_Detalle" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Proveidoes">
-            <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Proveido">
-              <MappingFragment StoreEntitySet="Proveido">
-                <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
-                <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="C_Ganancia" ColumnName="%Ganancia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TiendaRepuestosAuto_BD1Model.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TiendaRepuestosAuto_BD1Model.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TiendaRepuestosAuto_BD1Model.Store.sp_dropdiagram" />
@@ -1215,7 +1202,6 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TiendaRepuestosAuto_BD1Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TiendaRepuestosAuto_BD1Model.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="spAddPersonaOnly" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddPersonaOnly" />
-          <FunctionImportMapping FunctionImportName="spAddClienteAndPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddClienteAndPersona" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1230,7 +1216,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

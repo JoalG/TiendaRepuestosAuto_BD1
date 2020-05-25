@@ -7,6 +7,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TiendaRepuestosAuto_BD1", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaRepuestosAuto_BD1 WEB", "TiendaRepuestosAuto_BD1 WEB\TiendaRepuestosAuto_BD1 WEB.csproj", "{4F8BB751-DBA4-4E2B-9390-855F2E1DEB57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp_TiendaRepuestosAuto", "WebApp_TiendaRepuestosAuto\WebApp_TiendaRepuestosAuto.csproj", "{ACC3FFE7-384D-4F7C-9E8F-2B136A51F840}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{4F8BB751-DBA4-4E2B-9390-855F2E1DEB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8BB751-DBA4-4E2B-9390-855F2E1DEB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8BB751-DBA4-4E2B-9390-855F2E1DEB57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC3FFE7-384D-4F7C-9E8F-2B136A51F840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC3FFE7-384D-4F7C-9E8F-2B136A51F840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC3FFE7-384D-4F7C-9E8F-2B136A51F840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC3FFE7-384D-4F7C-9E8F-2B136A51F840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

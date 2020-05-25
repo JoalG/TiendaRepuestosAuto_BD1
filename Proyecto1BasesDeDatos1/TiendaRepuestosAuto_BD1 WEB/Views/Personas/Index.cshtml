@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TiendaRepuestosAuto_BD1_WEB.Models.Persona>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Cedula")
+        </th>
+        <th>
+            @Html.DisplayName("Nombre Completo")
+        </th>
+        <th>
+            @Html.DisplayName("Ciudad")
+        </th>
+        <th>
+            @Html.DisplayName("Dirección")
+        </th>
+        <th>
+            @Html.DisplayName("Estado")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Ciudad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.EstadoDeCliente.Tipo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Cedula }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Cedula }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Cedula })
+        </td>
+    </tr>
+}
+
+</table>
