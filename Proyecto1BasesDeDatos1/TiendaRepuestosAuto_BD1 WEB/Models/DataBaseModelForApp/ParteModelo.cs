@@ -8,6 +8,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
 {
     public class ParteModelo
     {
+        //hola
         [Display(Name = "Nombre de parte")]
         [MaxLength(50, ErrorMessage = "Nombre de parte debe ser menor a 50 caracteres")]
         [Required(ErrorMessage = "Tiene que ingresar nombre de parte")]
