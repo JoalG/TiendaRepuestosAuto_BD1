@@ -10,107 +10,112 @@ using TiendaRepuestosAuto_BD1_WEB.Models;
 
 namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
-    public class FabricanteDeAutoesController : Controller
+    public class ClientesController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities db = new TiendaRepuestosAuto_BD1Entities();
+        private TiendaRepuestosAuto_BD1Entities1 db = new TiendaRepuestosAuto_BD1Entities1();
 
-        // GET: FabricanteDeAutoes
+        // GET: Clientes
         public ActionResult Index()
         {
-            return View(db.FabricanteDeAutos.ToList());
+            var cliente = db.Cliente.Include(c => c.EstadoDeCliente);
+            return View(cliente.ToList());
         }
 
-        // GET: FabricanteDeAutoes/Details/5
+        // GET: Clientes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FabricanteDeAuto fabricanteDeAuto = db.FabricanteDeAutos.Find(id);
-            if (fabricanteDeAuto == null)
+            Cliente cliente = db.Cliente.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(fabricanteDeAuto);
+            return View(cliente);
         }
 
-        // GET: FabricanteDeAutoes/Create
+        // GET: Clientes/Create
         public ActionResult Create()
         {
+            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo");
             return View();
         }
 
-        // POST: FabricanteDeAutoes/Create
+        // POST: Clientes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_FabricanteDeAutos,Nombre")] FabricanteDeAuto fabricanteDeAuto)
+        public ActionResult Create([Bind(Include = "ID_Cliente,Direccion,Ciudad,ID_EstadoDeCliente")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                db.FabricanteDeAutos.Add(fabricanteDeAuto);
+                db.Cliente.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(fabricanteDeAuto);
+            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
+            return View(cliente);
         }
 
-        // GET: FabricanteDeAutoes/Edit/5
+        // GET: Clientes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FabricanteDeAuto fabricanteDeAuto = db.FabricanteDeAutos.Find(id);
-            if (fabricanteDeAuto == null)
+            Cliente cliente = db.Cliente.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(fabricanteDeAuto);
+            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
+            return View(cliente);
         }
 
-        // POST: FabricanteDeAutoes/Edit/5
+        // POST: Clientes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_FabricanteDeAutos,Nombre")] FabricanteDeAuto fabricanteDeAuto)
+        public ActionResult Edit([Bind(Include = "ID_Cliente,Direccion,Ciudad,ID_EstadoDeCliente")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(fabricanteDeAuto).State = EntityState.Modified;
+                db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(fabricanteDeAuto);
+            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
+            return View(cliente);
         }
 
-        // GET: FabricanteDeAutoes/Delete/5
+        // GET: Clientes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FabricanteDeAuto fabricanteDeAuto = db.FabricanteDeAutos.Find(id);
-            if (fabricanteDeAuto == null)
+            Cliente cliente = db.Cliente.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(fabricanteDeAuto);
+            return View(cliente);
         }
 
-        // POST: FabricanteDeAutoes/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            FabricanteDeAuto fabricanteDeAuto = db.FabricanteDeAutos.Find(id);
-            db.FabricanteDeAutos.Remove(fabricanteDeAuto);
+            Cliente cliente = db.Cliente.Find(id);
+            db.Cliente.Remove(cliente);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

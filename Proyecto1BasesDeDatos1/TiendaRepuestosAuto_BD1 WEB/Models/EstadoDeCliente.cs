@@ -17,13 +17,13 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EstadoDeCliente()
         {
-            this.Clientes = new HashSet<Cliente>();
+            this.Cliente = new HashSet<Cliente>();
         }
     
         public int ID_EstadoDeCliente { get; set; }
         public string Tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }

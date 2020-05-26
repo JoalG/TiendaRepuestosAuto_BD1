@@ -6,24 +6,156 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        /* The navigation menu */
+        .mynav_navbar {
+            overflow: hidden;
+            background-color: #222222;
+        }
+
+            /* Navigation links */
+            .mynav_navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        /* The subnavigation menu */
+        .mynav_subnav {
+            float: left;
+            overflow: hidden;
+        }
+
+            /* Subnav button */
+            .mynav_subnav .mynav_subnavbtn {
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+            /* Add a red background color to navigation links on hover */
+            .mynav_navbar a:hover, .mynav_subnav:hover .mynav_subnavbtn {
+                background-color: grey;
+            }
+
+        /* Style the subnav content - positioned absolute */
+        .mynav_subnav-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: grey;
+            width: 100%;
+            z-index: 1;
+        }
+
+            /* Style the subnav links */
+            .mynav_subnav-content a {
+                float: left;
+                color: white;
+                text-decoration: none;
+            }
+
+                /* Add a grey background color on hover */
+                .mynav_subnav-content a:hover {
+                    background-color: #eee;
+                    color: black;
+                }
+
+        /* When you move the mouse over the subnav container, open the subnav content */
+        .mynav_subnav:hover .mynav_subnav-content {
+            display: block;
+        }
+
+        /* Dropdown Button */
+        .mynav_dropbtn {
+            background-color: #4d4d4d;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .mynav_dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .mynav_dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0,0,0,0.2);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+            .mynav_dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .mynav_dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        /* Show the dropdown menu on hover */
+        .mynav_dropdown:hover .mynav_dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .mynav_dropdown:hover .dropbtn {
+            background-color: rgba(0,0,0,0.2);
+        }
+    </style>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!-- Load font awesome icons -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <!-- The navigation menu -->
+            <div class="mynav_navbar">
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("About", "About", "Home")
+                @Html.ActionLink("Contact", "Contact", "Home")
+                <div class="mynav_subnav">
+                    <button class="mynav_subnavbtn">Clientes <i class="fa fa-caret-down"></i></button>
+                    <div class="mynav_subnav-content">
+                        <div class="mynav_dropdown">
+                            <button class="mynav_dropbtn">  Personas  <i class="fa fa-caret-down"></i></button>
+                            <div class="mynav_dropdown-content">
+                                @Html.ActionLink("Listar Personas", "Index", "Personas")
+                                @Html.ActionLink("Ingresar nueva persona", "Create", "Personas")
+                            </div>
+                        </div>
+                        <div class="mynav_dropdown">
+                            <button class="mynav_dropbtn">  Organizaciones  <i class="fa fa-caret-down"></i></button>
+                            <div class="mynav_dropdown-content">
+                                @Html.ActionLink("Listar Organizaciones", "Index", "Organizacion")
+                                @Html.ActionLink("Ingresar nueva organización", "Create", "Organizacion")
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Contacto()
         {
-            this.Organizacions = new HashSet<Organizacion>();
+            this.Organizacion = new HashSet<Organizacion>();
         }
     
         public int ID_Contacto { get; set; }
@@ -27,7 +27,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public int CedulaJuridica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organizacion> Organizacions { get; set; }
-        public virtual Organizacion Organizacion { get; set; }
+        public virtual ICollection<Organizacion> Organizacion { get; set; }
+        public virtual Organizacion Organizacion1 { get; set; }
     }
 }

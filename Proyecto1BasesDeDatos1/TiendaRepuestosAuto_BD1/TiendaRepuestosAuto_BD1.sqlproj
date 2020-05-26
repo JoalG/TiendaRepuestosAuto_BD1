@@ -60,6 +60,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\EstadoDeCliente.sql" />
@@ -78,6 +79,9 @@
     <Build Include="dbo\Tables\TelefonoProveedor.sql" />
     <Build Include="dbo\Tables\ParteParaTipoDeAutomovil.sql" />
     <Build Include="dbo\Tables\Detalle.sql" />
+    <Build Include="dbo\Stored Procedures\spAddPersonaOnly.sql" />
+    <Build Include="dbo\Stored Procedures\spAddClienteAndPersona2.sql" />
+    <Build Include="dbo\Stored Procedures\spAddClienteAndPersona.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TiendaRepuestosAuto_BD1.refactorlog" />

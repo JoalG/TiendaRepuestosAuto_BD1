@@ -15,10 +15,10 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TiendaRepuestosAuto_BD1Entities : DbContext
+    public partial class TiendaRepuestosAuto_BD1Entities1 : DbContext
     {
-        public TiendaRepuestosAuto_BD1Entities()
-            : base("name=TiendaRepuestosAuto_BD1Entities")
+        public TiendaRepuestosAuto_BD1Entities1()
+            : base("name=TiendaRepuestosAuto_BD1Entities1")
         {
         }
     
@@ -28,22 +28,22 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         }
     
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Contacto> Contactoes { get; set; }
-        public virtual DbSet<EstadoDeCliente> EstadoDeClientes { get; set; }
-        public virtual DbSet<FabricanteDeAuto> FabricanteDeAutos { get; set; }
-        public virtual DbSet<FabricanteDePieza> FabricanteDePiezas { get; set; }
-        public virtual DbSet<Orden> Ordens { get; set; }
-        public virtual DbSet<Organizacion> Organizacions { get; set; }
-        public virtual DbSet<Parte> Partes { get; set; }
-        public virtual DbSet<Persona> Personas { get; set; }
-        public virtual DbSet<Proveedor> Proveedors { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Telefono> Telefonoes { get; set; }
-        public virtual DbSet<TelefonoProveedor> TelefonoProveedors { get; set; }
-        public virtual DbSet<TipoDeAutomovil> TipoDeAutomovils { get; set; }
-        public virtual DbSet<Detalle> Detalles { get; set; }
-        public virtual DbSet<Proveido> Proveidoes { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Contacto> Contacto { get; set; }
+        public virtual DbSet<Detalle> Detalle { get; set; }
+        public virtual DbSet<EstadoDeCliente> EstadoDeCliente { get; set; }
+        public virtual DbSet<FabricanteDeAutos> FabricanteDeAutos { get; set; }
+        public virtual DbSet<FabricanteDePiezas> FabricanteDePiezas { get; set; }
+        public virtual DbSet<Orden> Orden { get; set; }
+        public virtual DbSet<Organizacion> Organizacion { get; set; }
+        public virtual DbSet<Parte> Parte { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Proveido> Proveido { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Telefono> Telefono { get; set; }
+        public virtual DbSet<TelefonoProveedor> TelefonoProveedor { get; set; }
+        public virtual DbSet<TipoDeAutomovil> TipoDeAutomovil { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -148,21 +148,41 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int spAddPersonaOnly(Nullable<int> cedula, string nombre, Nullable<int> iD_ClientePersona)
+        public virtual int spAddClienteAndOrganizacion(Nullable<int> cedulaJuridica, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, string nombreContacto, Nullable<long> telefono, string cargo, ObjectParameter opReturn)
         {
-            var cedulaParameter = cedula.HasValue ?
-                new ObjectParameter("Cedula", cedula) :
-                new ObjectParameter("Cedula", typeof(int));
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("CedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("CedulaJuridica", typeof(int));
     
             var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
     
-            var iD_ClientePersonaParameter = iD_ClientePersona.HasValue ?
-                new ObjectParameter("ID_ClientePersona", iD_ClientePersona) :
-                new ObjectParameter("ID_ClientePersona", typeof(int));
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddPersonaOnly", cedulaParameter, nombreParameter, iD_ClientePersonaParameter);
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            var nombreContactoParameter = nombreContacto != null ?
+                new ObjectParameter("NombreContacto", nombreContacto) :
+                new ObjectParameter("NombreContacto", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(long));
+    
+            var cargoParameter = cargo != null ?
+                new ObjectParameter("Cargo", cargo) :
+                new ObjectParameter("Cargo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddClienteAndOrganizacion", cedulaJuridicaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter, nombreContactoParameter, telefonoParameter, cargoParameter, opReturn);
         }
     
         public virtual int spAddClienteAndPersona(Nullable<int> cedula, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente)
@@ -188,6 +208,128 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("ID_EstadoDeCliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddClienteAndPersona", cedulaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter);
+        }
+    
+        public virtual int spAddClienteAndPersona2(Nullable<int> cedula, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, ObjectParameter opReturn)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddClienteAndPersona2", cedulaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter, opReturn);
+        }
+    
+        public virtual int spAddPersonaOnly(Nullable<int> cedula, string nombre, Nullable<int> iD_ClientePersona)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var iD_ClientePersonaParameter = iD_ClientePersona.HasValue ?
+                new ObjectParameter("ID_ClientePersona", iD_ClientePersona) :
+                new ObjectParameter("ID_ClientePersona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddPersonaOnly", cedulaParameter, nombreParameter, iD_ClientePersonaParameter);
+        }
+    
+        public virtual int spModifyOrganizacion(Nullable<int> cedulaJuridica, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, string nombreContacto, Nullable<long> telefono, string cargo)
+        {
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("cedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("cedulaJuridica", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            var nombreContactoParameter = nombreContacto != null ?
+                new ObjectParameter("NombreContacto", nombreContacto) :
+                new ObjectParameter("NombreContacto", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(long));
+    
+            var cargoParameter = cargo != null ?
+                new ObjectParameter("Cargo", cargo) :
+                new ObjectParameter("Cargo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModifyOrganizacion", cedulaJuridicaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter, nombreContactoParameter, telefonoParameter, cargoParameter);
+        }
+    
+        public virtual int spModifyPersona(Nullable<int> cedula, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModifyPersona", cedulaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter);
+        }
+    
+        public virtual int spSuspenderOrganizacion(Nullable<int> cedulaJuridica)
+        {
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("cedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("cedulaJuridica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderOrganizacion", cedulaJuridicaParameter);
+        }
+    
+        public virtual int spSuspenderPersona(Nullable<int> cedula)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderPersona", cedulaParameter);
         }
     }
 }

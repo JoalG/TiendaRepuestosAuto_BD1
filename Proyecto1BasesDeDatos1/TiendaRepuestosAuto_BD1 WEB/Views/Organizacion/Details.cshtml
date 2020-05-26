@@ -1,0 +1,42 @@
+﻿@model TiendaRepuestosAuto_BD1_WEB.Models.Organizacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Organizacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contacto.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contacto.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CedulaJuridica }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

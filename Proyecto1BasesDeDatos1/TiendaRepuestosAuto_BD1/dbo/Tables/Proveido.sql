@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Proveido]
 (
 	--[ID_Proveido] INT IDENTITY(0,1) NOT NULL, --
-    [%Ganancia] INT NOT NULL, 
+    [Ganancia] DECIMAL(19, 4) NOT NULL, 
     [Precio] DECIMAL(19, 4) NOT NULL, 
     [ID_Proveedor] INT NOT NULL, 
     [ID_Parte] INT NOT NULL, 

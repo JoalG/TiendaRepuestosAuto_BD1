@@ -17,7 +17,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
-            this.Telefonoes = new HashSet<Telefono>();
+            this.Telefono = new HashSet<Telefono>();
         }
     
         public int Cedula { get; set; }
@@ -26,6 +26,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Telefono> Telefonoes { get; set; }
+        public virtual ICollection<Telefono> Telefono { get; set; }
     }
 }

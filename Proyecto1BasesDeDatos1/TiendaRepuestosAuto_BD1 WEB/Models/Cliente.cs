@@ -17,9 +17,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.Organizacions = new HashSet<Organizacion>();
-            this.Personas = new HashSet<Persona>();
-            this.Ordens = new HashSet<Orden>();
+            this.Organizacion = new HashSet<Organizacion>();
+            this.Persona = new HashSet<Persona>();
+            this.Orden = new HashSet<Orden>();
         }
     
         public int ID_Cliente { get; set; }
@@ -28,11 +28,11 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public int ID_EstadoDeCliente { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organizacion> Organizacions { get; set; }
+        public virtual ICollection<Organizacion> Organizacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Personas { get; set; }
+        public virtual ICollection<Persona> Persona { get; set; }
         public virtual EstadoDeCliente EstadoDeCliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orden> Ordens { get; set; }
+        public virtual ICollection<Orden> Orden { get; set; }
     }
 }

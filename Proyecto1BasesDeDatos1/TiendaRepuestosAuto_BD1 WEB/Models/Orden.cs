@@ -17,7 +17,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orden()
         {
-            this.Detalles = new HashSet<Detalle>();
+            this.Detalle = new HashSet<Detalle>();
         }
     
         public int ID_Orden { get; set; }
@@ -27,6 +27,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle> Detalles { get; set; }
+        public virtual ICollection<Detalle> Detalle { get; set; }
     }
 }

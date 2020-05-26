@@ -12,18 +12,18 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FabricanteDeAuto
+    public partial class FabricanteDePiezas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FabricanteDeAuto()
+        public FabricanteDePiezas()
         {
-            this.TipoDeAutomovils = new HashSet<TipoDeAutomovil>();
+            this.Parte = new HashSet<Parte>();
         }
     
-        public int ID_FabricanteDeAutos { get; set; }
+        public int ID_FabricanteDePiezas { get; set; }
         public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TipoDeAutomovil> TipoDeAutomovils { get; set; }
+        public virtual ICollection<Parte> Parte { get; set; }
     }
 }

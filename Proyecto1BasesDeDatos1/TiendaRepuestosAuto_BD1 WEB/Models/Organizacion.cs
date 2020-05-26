@@ -17,17 +17,17 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Organizacion()
         {
-            this.Contactoes = new HashSet<Contacto>();
+            this.Contacto1 = new HashSet<Contacto>();
         }
     
         public int CedulaJuridica { get; set; }
-        public byte[] Nombre { get; set; }
+        public string Nombre { get; set; }
         public int ID_Cliente { get; set; }
-        public int ID_Contacto { get; set; }
+        public Nullable<int> ID_Contacto { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Contacto Contacto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contacto> Contactoes { get; set; }
+        public virtual ICollection<Contacto> Contacto1 { get; set; }
     }
 }
