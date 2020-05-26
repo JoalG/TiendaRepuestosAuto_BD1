@@ -5,7 +5,7 @@
     [IVA] DECIMAL(19, 4) NOT NULL, 
     [ID_Cliente] INT NOT NULL, 
     CONSTRAINT [PK_Orden] PRIMARY KEY ([ID_Orden]), 
-    CONSTRAINT [FK_Orden_Cliente] FOREIGN KEY ([ID_Cliente]) REFERENCES [Cliente]([ID_Cliente])
+    CONSTRAINT [FK_Orden_Cliente] FOREIGN KEY ([ID_Cliente]) REFERENCES [Cliente]([ID_Cliente]) ON DELETE CASCADE ON UPDATE CASCADE
 
 
 )

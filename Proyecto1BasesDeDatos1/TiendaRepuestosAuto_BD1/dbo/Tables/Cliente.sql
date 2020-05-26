@@ -6,5 +6,5 @@
     [ID_EstadoDeCliente] INT NOT NULL, 
 
     CONSTRAINT [PK_Cliente] PRIMARY KEY (ID_Cliente),
-    CONSTRAINT [FK_EstadoDeCliente] FOREIGN KEY ([ID_EstadoDeCliente]) REFERENCES [EstadoDeCliente]([ID_EstadoDeCliente])
+    CONSTRAINT [FK_EstadoDeCliente] FOREIGN KEY ([ID_EstadoDeCliente]) REFERENCES [EstadoDeCliente]([ID_EstadoDeCliente]) ON DELETE CASCADE ON UPDATE CASCADE
 )
