@@ -129,6 +129,7 @@
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
+    <Compile Include="Controllers\ParteParaTipoDeAutomovilController.cs" />
     <Compile Include="Controllers\PartesController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProveidoController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Models\DataBaseModelForApp\ContactoModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\OrganizacionModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\ParteModelo.cs" />
+    <Compile Include="Models\DataBaseModelForApp\ParteParaTipoDeAutomovilModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\ParteRelacionProveedorModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\personaModel.cs" />
     <Compile Include="Models\Detalle.cs">
@@ -303,9 +305,11 @@
     <Content Include="Views\Proveido\Details.cshtml" />
     <Content Include="Views\Proveido\Edit.cshtml" />
     <Content Include="Views\Proveido\Index.cshtml" />
+    <Content Include="Views\Partes\AsociarConTipoDeAutomovil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ParteParaTipoDeAutomovil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -129,5 +129,46 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Partes/Edit/5
+        public ActionResult AsociarConTipoDeAutomovil(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Parte parte = db.Parte.Find(id);
+            if (parte == null)
+            {
+                return HttpNotFound();
+            }
+            ParteParaTipoDeAutomovilModel parteT = new ParteParaTipoDeAutomovilModel
+            {
+                ID_Parte = parte.ID_Parte,
+                ID_TipoDeAutomovil = 1,
+                nombreParte = parte.Nombre
+            };
+            ViewBag.ID_TipoDeAutomovil = new SelectList(db.TipoDeAutomovil, "ID_TipoDeAUtomovil", "Nombre");
+            return View(parteT);
+        }
+
+        // POST: Partes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AsociarConTipoDeAutomovil(ParteParaTipoDeAutomovilModel parte)
+        {
+            if (ModelState.IsValid)
+            {
+                ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
+                TipoDeAutomovil tipo = db.TipoDeAutomovil.Find(parte.ID_TipoDeAutomovil);
+                db.spAssociateParteConTipoDeAutomovil(parte.ID_Parte, parte.ID_TipoDeAutomovil, tipo.ID_FabricanteDeAutos,result);
+                return RedirectToAction("Index");
+            }
+            
+            return View(parte);
+        }
     }
 }
