@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TiendaRepuestosAuto_BD1_WEB.Models.Proveido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Ganancia")
+        </th>
+        <th>
+            @Html.DisplayName("Precio")
+        </th>
+        <th>
+            @Html.DisplayName("Parte")
+        </th>
+        <th>
+            @Html.DisplayName("Proveedor")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ganancia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parte.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id1 = item.ID_Proveedor, id2 = item.ID_Parte}) |
+        </td>
+    </tr>
+}
+
+</table>

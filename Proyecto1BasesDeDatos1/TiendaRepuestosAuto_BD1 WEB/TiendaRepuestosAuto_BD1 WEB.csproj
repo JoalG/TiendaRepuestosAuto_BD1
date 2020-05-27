@@ -129,7 +129,9 @@
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
+    <Compile Include="Controllers\PartesController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="Controllers\ProveidoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,6 +147,7 @@
     <Compile Include="Models\DataBaseModelForApp\ContactoModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\OrganizacionModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\ParteModelo.cs" />
+    <Compile Include="Models\DataBaseModelForApp\ParteRelacionProveedorModel.cs" />
     <Compile Include="Models\DataBaseModelForApp\personaModel.cs" />
     <Compile Include="Models\Detalle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -189,6 +192,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveido.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spFindPartePorModeloAño_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spFindProveedorParaParte_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -284,6 +293,16 @@
     <Content Include="Views\Clientes\Details.cshtml" />
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Partes\Create.cshtml" />
+    <Content Include="Views\Partes\Delete.cshtml" />
+    <Content Include="Views\Partes\Details.cshtml" />
+    <Content Include="Views\Partes\Edit.cshtml" />
+    <Content Include="Views\Partes\Index.cshtml" />
+    <Content Include="Views\Proveido\Create.cshtml" />
+    <Content Include="Views\Proveido\Delete.cshtml" />
+    <Content Include="Views\Proveido\Details.cshtml" />
+    <Content Include="Views\Proveido\Edit.cshtml" />
+    <Content Include="Views\Proveido\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

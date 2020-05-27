@@ -14,7 +14,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class OrganizacionController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities1 db = new TiendaRepuestosAuto_BD1Entities1();
+        private TiendaRepuestosAuto_BD1Entities2 db = new TiendaRepuestosAuto_BD1Entities2();
 
         // GET: Organizacion
         public ActionResult Index()
@@ -148,6 +148,12 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult suspenderOrganizacion(int? id)
+        {
+            db.spSuspenderOrganizacion(id);
+            return RedirectToAction("Index");
         }
     }
 }

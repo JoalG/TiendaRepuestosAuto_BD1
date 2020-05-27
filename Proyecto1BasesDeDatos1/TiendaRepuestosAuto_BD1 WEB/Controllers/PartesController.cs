@@ -2,121 +2,122 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TiendaRepuestosAuto_BD1_WEB.Models;
+using TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp;
 
 namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
-    public class ClientesController : Controller
+    public class PartesController : Controller
     {
         private TiendaRepuestosAuto_BD1Entities2 db = new TiendaRepuestosAuto_BD1Entities2();
 
-        // GET: Clientes
+        // GET: Partes
         public ActionResult Index()
         {
-            var cliente = db.Cliente.Include(c => c.EstadoDeCliente);
-            return View(cliente.ToList());
+            var parte = db.Parte.Include(p => p.FabricanteDePiezas);
+            return View(parte.ToList());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Partes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
+            Parte parte = db.Parte.Find(id);
+            if (parte == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(parte);
         }
 
-        // GET: Clientes/Create
+        // GET: Partes/Create
         public ActionResult Create()
         {
-            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo");
+            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre");
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Partes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Cliente,Direccion,Ciudad,ID_EstadoDeCliente")] Cliente cliente)
+        public ActionResult Create(ParteModelo parte)
         {
             if (ModelState.IsValid)
             {
-                db.Cliente.Add(cliente);
-                db.SaveChanges();
+                ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
+                db.spAddParte(parte.Nombre, parte.Marca, parte.ID_FabricanteDePiezas, result);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
-            return View(cliente);
+            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre", parte.ID_FabricanteDePiezas);
+            return View(parte);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Partes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
+            Parte parte = db.Parte.Find(id);
+            if (parte == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
-            return View(cliente);
+            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre", parte.ID_FabricanteDePiezas);
+            return View(parte);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Partes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Cliente,Direccion,Ciudad,ID_EstadoDeCliente")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "ID_Parte,Nombre,Marca,ID_FabricanteDePiezas")] Parte parte)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
+                db.Entry(parte).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo", cliente.ID_EstadoDeCliente);
-            return View(cliente);
+            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre", parte.ID_FabricanteDePiezas);
+            return View(parte);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Partes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Cliente.Find(id);
-            if (cliente == null)
+            Parte parte = db.Parte.Find(id);
+            if (parte == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(parte);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Partes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cliente cliente = db.Cliente.Find(id);
-            db.Cliente.Remove(cliente);
-            db.SaveChanges();
+            ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
+            db.spBorrarParte(id, result);
             return RedirectToAction("Index");
         }
 

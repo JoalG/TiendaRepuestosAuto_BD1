@@ -14,9 +14,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
         [Required(ErrorMessage = "Tiene que ingresar nombre de parte")]
         public string Nombre { get; set; }
 
-        [Display(Name = "Nombre de parte")]
-        [MaxLength(50, ErrorMessage = "Nombre completo debe ser menor a 50 caracteres")]
-        [Required(ErrorMessage = "Tiene que ingresar su Nombre")]
+        [Display(Name = "Marca")]
+        [MaxLength(50, ErrorMessage = "La marca debe ser menor a 50 caracteres")]
+        [Required(ErrorMessage = "Debe ingresar el nombre de la marca")]
         public string Marca { get; set; }
 
         [Display(Name = "Fabricante")]

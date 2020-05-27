@@ -10,16 +10,12 @@
 namespace TiendaRepuestosAuto_BD1_WEB.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Proveido
+    public partial class spFindPartePorModeloAño_Result
     {
-        public decimal Ganancia { get; set; }
-        public decimal Precio { get; set; }
-        public int ID_Proveedor { get; set; }
         public int ID_Parte { get; set; }
-    
-        public virtual Parte Parte { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        public string Nombre { get; set; }
+        public string Marca { get; set; }
+        public int ID_FabricanteDePiezas { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class ContactoController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities1 db = new TiendaRepuestosAuto_BD1Entities1();
+        private TiendaRepuestosAuto_BD1Entities2 db = new TiendaRepuestosAuto_BD1Entities2();
 
         // GET: Contacto
         public ActionResult Index()

@@ -123,7 +123,7 @@
             <PropertyRef Name="ID_Proveedor" />
             <PropertyRef Name="ID_Parte" />
           </Key>
-          <Property Name="%Ganancia" Type="int" Nullable="false" />
+          <Property Name="Ganancia" Type="decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Precio" Type="decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="ID_Proveedor" Type="int" Nullable="false" />
           <Property Name="ID_Parte" Type="int" Nullable="false" />
@@ -166,7 +166,9 @@
           <Property Name="ID_FabricanteDeAutos" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cliente_Organizacion">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Organizacion" Type="Self.Organizacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -178,7 +180,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cliente_Persona">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -204,7 +208,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EstadoDeCliente">
-          <End Role="EstadoDeCliente" Type="Self.EstadoDeCliente" Multiplicity="1" />
+          <End Role="EstadoDeCliente" Type="Self.EstadoDeCliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoDeCliente">
@@ -216,7 +222,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FabricanteDeAutos">
-          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAutos" Multiplicity="1" />
+          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAutos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDeAutos">
@@ -228,7 +236,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orden_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -240,7 +250,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orden_Detalle">
-          <End Role="Orden" Type="Self.Orden" Multiplicity="1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orden">
@@ -264,7 +276,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parte_Detalle">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -276,7 +290,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parte_FabricanteDePiezas">
-          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePiezas" Multiplicity="1" />
+          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePiezas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Parte" Type="Self.Parte" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDePiezas">
@@ -288,7 +304,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ParteParaTipoDeAutomovil_Parte">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ParteParaTipoDeAutomovil" Type="Self.ParteParaTipoDeAutomovil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -300,7 +318,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ParteParaTipoDeAutomovil_TipoDeAutomovil">
-          <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="1" />
+          <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ParteParaTipoDeAutomovil" Type="Self.ParteParaTipoDeAutomovil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDeAutomovil">
@@ -314,7 +334,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Detalle">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -326,7 +348,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveido_Parte">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -338,7 +362,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveido_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -350,7 +376,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Telefono_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
@@ -362,7 +390,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TelefonoProveedor_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TelefonoProveedor" Type="Self.TelefonoProveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -430,10 +460,50 @@
           <Parameter Name="ID_EstadoDeCliente" Type="int" Mode="In" />
           <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="spAddDetalleOrden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Orden" Type="int" Mode="In" />
+          <Parameter Name="ID_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAddOrden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Cliente" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spAddParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Marca" Type="varchar" Mode="In" />
+          <Parameter Name="ID_Fabricante" Type="int" Mode="In" />
+          <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="spAddPersonaOnly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
           <Parameter Name="ID_ClientePersona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAssociateParteConProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+          <Parameter Name="ID_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Ganancia" Type="int" Mode="In" />
+          <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spAssociateParteConTipoDeAutomovil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+          <Parameter Name="ID_TipoDeAutomovil" Type="int" Mode="In" />
+          <Parameter Name="ID_FabricanteDeAutos" Type="int" Mode="In" />
+          <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spBorrarParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+          <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spFindPartePorModeloAño" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Model" Type="nvarchar" Mode="In" />
+          <Parameter Name="Año" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spFindProveedorParaParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spModifyOrganizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedulaJuridica" Type="int" Mode="In" />
@@ -451,6 +521,11 @@
           <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
           <Parameter Name="Ciudad" Type="nvarchar" Mode="In" />
           <Parameter Name="ID_EstadoDeCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spModifyPrecioParteDeProvedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+          <Parameter Name="ID_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
         </Function>
         <Function Name="spSuspenderOrganizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedulaJuridica" Type="int" Mode="In" />
@@ -685,7 +760,7 @@
             <PropertyRef Name="ID_Proveedor" />
             <PropertyRef Name="ID_Parte" />
           </Key>
-          <Property Name="C_Ganancia" Type="Int32" Nullable="false" />
+          <Property Name="Ganancia" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="ID_Proveedor" Type="Int32" Nullable="false" />
           <Property Name="ID_Parte" Type="Int32" Nullable="false" />
@@ -734,7 +809,9 @@
           <NavigationProperty Name="Parte" Relationship="Self.ParteParaTipoDeAutomovil" FromRole="TipoDeAutomovil" ToRole="Parte" />
         </EntityType>
         <Association Name="FK_Cliente_Organizacion">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Organizacion" Type="Self.Organizacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -746,7 +823,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cliente_Persona">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -758,7 +837,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EstadoDeCliente">
-          <End Role="EstadoDeCliente" Type="Self.EstadoDeCliente" Multiplicity="1" />
+          <End Role="EstadoDeCliente" Type="Self.EstadoDeCliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoDeCliente">
@@ -770,7 +851,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orden_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -808,7 +891,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orden_Detalle">
-          <End Role="Orden" Type="Self.Orden" Multiplicity="1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orden">
@@ -820,7 +905,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parte_Detalle">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -832,7 +919,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Detalle">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -844,7 +933,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FabricanteDeAutos">
-          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAutos" Multiplicity="1" />
+          <End Role="FabricanteDeAutos" Type="Self.FabricanteDeAutos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDeAutos">
@@ -856,7 +947,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parte_FabricanteDePiezas">
-          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePiezas" Multiplicity="1" />
+          <End Role="FabricanteDePiezas" Type="Self.FabricanteDePiezas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Parte" Type="Self.Parte" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FabricanteDePiezas">
@@ -868,7 +961,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveido_Parte">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -880,7 +975,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Telefono_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
@@ -892,7 +989,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveido_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Proveido" Type="Self.Proveido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -904,7 +1003,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TelefonoProveedor_Proveedor">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TelefonoProveedor" Type="Self.TelefonoProveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
@@ -919,7 +1020,7 @@
           <End Role="Parte" Type="Self.Parte" Multiplicity="*" />
           <End Role="TipoDeAutomovil" Type="Self.TipoDeAutomovil" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="TiendaRepuestosAuto_BD1Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TiendaRepuestosAuto_BD1Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Contacto" EntityType="Self.Contacto" />
@@ -1057,10 +1158,50 @@
             <Parameter Name="ID_EstadoDeCliente" Mode="In" Type="Int32" />
             <Parameter Name="OpReturn" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spAddDetalleOrden">
+            <Parameter Name="ID_Orden" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAddOrden">
+            <Parameter Name="ID_Cliente" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spAddParte">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Marca" Mode="In" Type="String" />
+            <Parameter Name="ID_Fabricante" Mode="In" Type="Int32" />
+            <Parameter Name="OpReturn" Mode="InOut" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="spAddPersonaOnly">
             <Parameter Name="Cedula" Mode="In" Type="Int32" />
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="ID_ClientePersona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAssociateParteConProveedor">
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Ganancia" Mode="In" Type="Int32" />
+            <Parameter Name="OpReturn" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAssociateParteConTipoDeAutomovil">
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+            <Parameter Name="ID_TipoDeAutomovil" Mode="In" Type="Int32" />
+            <Parameter Name="ID_FabricanteDeAutos" Mode="In" Type="Int32" />
+            <Parameter Name="OpReturn" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spBorrarParte">
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+            <Parameter Name="OpReturn" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spFindPartePorModeloAño" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spFindPartePorModeloAño_Result)">
+            <Parameter Name="Model" Mode="In" Type="String" />
+            <Parameter Name="Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spFindProveedorParaParte" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spFindProveedorParaParte_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spModifyOrganizacion">
             <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
@@ -1078,6 +1219,11 @@
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="Ciudad" Mode="In" Type="String" />
             <Parameter Name="ID_EstadoDeCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModifyPrecioParteDeProvedor">
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spSuspenderOrganizacion">
             <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
@@ -1097,12 +1243,22 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="spFindPartePorModeloAño_Result">
+          <Property Type="Int32" Name="ID_Parte" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Marca" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ID_FabricanteDePiezas" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spFindProveedorParaParte_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ID_Proveedor" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TiendaRepuestosAuto_BD1ModelStoreContainer" CdmEntityContainer="TiendaRepuestosAuto_BD1Entities1">
+        <EntityContainerMapping StorageEntityContainer="TiendaRepuestosAuto_BD1ModelStoreContainer" CdmEntityContainer="TiendaRepuestosAuto_BD1Entities2">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
@@ -1219,7 +1375,7 @@
           <EntitySetMapping Name="Proveido">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.Proveido">
               <MappingFragment StoreEntitySet="Proveido">
-                <ScalarProperty Name="C_Ganancia" ColumnName="%Ganancia" />
+                <ScalarProperty Name="Ganancia" ColumnName="Ganancia" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
                 <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
@@ -1302,9 +1458,34 @@
           <FunctionImportMapping FunctionImportName="spAddClienteAndOrganizacion" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddClienteAndOrganizacion" />
           <FunctionImportMapping FunctionImportName="spAddClienteAndPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddClienteAndPersona" />
           <FunctionImportMapping FunctionImportName="spAddClienteAndPersona2" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddClienteAndPersona2" />
+          <FunctionImportMapping FunctionImportName="spAddDetalleOrden" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddDetalleOrden" />
+          <FunctionImportMapping FunctionImportName="spAddOrden" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddOrden" />
+          <FunctionImportMapping FunctionImportName="spAddParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddParte" />
           <FunctionImportMapping FunctionImportName="spAddPersonaOnly" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddPersonaOnly" />
+          <FunctionImportMapping FunctionImportName="spAssociateParteConProveedor" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAssociateParteConProveedor" />
+          <FunctionImportMapping FunctionImportName="spAssociateParteConTipoDeAutomovil" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAssociateParteConTipoDeAutomovil" />
+          <FunctionImportMapping FunctionImportName="spBorrarParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spBorrarParte" />
+          <FunctionImportMapping FunctionImportName="spFindPartePorModeloAño" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spFindPartePorModeloAño">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.spFindPartePorModeloAño_Result">
+                <ScalarProperty Name="ID_Parte" ColumnName="ID_Parte" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="ID_FabricanteDePiezas" ColumnName="ID_FabricanteDePiezas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spFindProveedorParaParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spFindProveedorParaParte">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.spFindProveedorParaParte_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID_Proveedor" ColumnName="ID_Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spModifyOrganizacion" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyOrganizacion" />
           <FunctionImportMapping FunctionImportName="spModifyPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyPersona" />
+          <FunctionImportMapping FunctionImportName="spModifyPrecioParteDeProvedor" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyPrecioParteDeProvedor" />
           <FunctionImportMapping FunctionImportName="spSuspenderOrganizacion" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderOrganizacion" />
           <FunctionImportMapping FunctionImportName="spSuspenderPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderPersona" />
         </EntityContainerMapping>

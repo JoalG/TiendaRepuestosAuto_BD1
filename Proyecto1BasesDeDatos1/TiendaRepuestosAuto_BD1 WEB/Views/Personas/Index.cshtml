@@ -27,6 +27,8 @@
             @Html.DisplayName("Estado")
         </th>
         <th></th>
+        <th>@Html.DisplayName("Opciones")</th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -47,9 +49,13 @@
             @Html.DisplayFor(modelItem => item.Cliente.EstadoDeCliente.Tipo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Cedula }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Cedula }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Cedula })
+            @Html.ActionLink("Modificar", "Edit", new { id = item.Cedula })       |
+        </td>
+        <td>
+            @Html.ActionLink("Detalles", "Details", new { id = item.Cedula })       |
+        </td>
+        <td>
+            @Html.ActionLink("Suspender", "suspenderPersona", new { id = item.Cedula })
         </td>
     </tr>
 }

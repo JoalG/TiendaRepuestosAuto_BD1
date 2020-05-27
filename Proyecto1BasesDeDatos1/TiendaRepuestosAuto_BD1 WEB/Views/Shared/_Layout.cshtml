@@ -156,6 +156,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="mynav_subnav">
+                    <button class="mynav_subnavbtn"> Partes <i class="fa fa-caret-down"></i></button>
+                    <div class="mynav_subnav-content">
+                        @Html.ActionLink("Listar Partes", "Index", "Partes")
+                        @Html.ActionLink("Ingresar nueva Parte", "Create", "Partes")
+                        @Html.ActionLink("Asociar parte con proveedor", "Create", "Proveido")
+                        @Html.ActionLink("Listar parte con proveedor", "Index", "Proveido")
+                    </div>
+                </div>
             </div>
         </div>
     </div>

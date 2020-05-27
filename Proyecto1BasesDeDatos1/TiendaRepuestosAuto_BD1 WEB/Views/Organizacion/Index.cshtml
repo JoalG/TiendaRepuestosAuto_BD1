@@ -62,15 +62,12 @@
             @Html.DisplayFor(modelItem => item.Contacto.Telefono)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Contacto.Telefono)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Contacto.Cargo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CedulaJuridica }) |
             @Html.ActionLink("Details", "Details", new { id=item.CedulaJuridica }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CedulaJuridica })
+            @Html.ActionLink("Suspender", "suspenderOrganizacion", new { id=item.CedulaJuridica })
         </td>
     </tr>
 }
