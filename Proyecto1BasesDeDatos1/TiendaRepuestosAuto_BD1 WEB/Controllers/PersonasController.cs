@@ -74,7 +74,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             }
 
             //ViewBag.ID_ClientePersona = new SelectList(db.Clientes, "ID_Cliente", "Direccion", persona.ID_ClientePersona);
-            return View(persona);
         }
 
         // GET: Personas/Edit/5
