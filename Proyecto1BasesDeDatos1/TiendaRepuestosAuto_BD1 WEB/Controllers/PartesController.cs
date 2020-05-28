@@ -149,7 +149,30 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ID_TipoDeAutomovil = 1,
                 nombreParte = parte.Nombre
             };
-            ViewBag.ID_TipoDeAutomovil = new SelectList(db.TipoDeAutomovil, "ID_TipoDeAutomovil", "Modelo");
+
+            /*
+            var tipoDeAutomovil = db.TipoDeAutomovil.Include(t => t.FabricanteDeAutos);
+
+            tipoDeAutomovil.ToList();
+
+            var tipos = from t in tipoDeAutomovil
+                        select new SelectList
+                        {
+                            Value = t.ID_TipoDeAutomovil,
+                            Text = $"{t.Modelo}-- £{t.Año}"
+                        };
+            */
+
+            var tipos = db.TipoDeAutomovil
+                .Where(x => x.ID_TipoDeAutomovil == x.ID_TipoDeAutomovil)
+                .Select(x => new
+                {
+                    ID_TipoDeAutomovil = x.ID_TipoDeAutomovil,
+                    Name = x.Modelo + " - " + x.Año.ToString()
+                });
+
+
+            ViewBag.ID_TipoDeAutomovil = new SelectList(tipos, "ID_TipoDeAutomovil", "Name");
             return View(parteT);
         }
 

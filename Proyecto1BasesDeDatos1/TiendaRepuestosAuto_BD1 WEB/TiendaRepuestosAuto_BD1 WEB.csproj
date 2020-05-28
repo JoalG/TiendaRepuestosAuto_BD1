@@ -133,6 +133,7 @@
     <Compile Include="Controllers\PartesController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProveidoController.cs" />
+    <Compile Include="Controllers\TipoDeAutomovilsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,6 +310,11 @@
     <Content Include="Views\Proveido\Edit.cshtml" />
     <Content Include="Views\Proveido\Index.cshtml" />
     <Content Include="Views\Partes\AsociarConTipoDeAutomovil.cshtml" />
+    <Content Include="Views\TipoDeAutomovils\Create.cshtml" />
+    <Content Include="Views\TipoDeAutomovils\Delete.cshtml" />
+    <Content Include="Views\TipoDeAutomovils\Details.cshtml" />
+    <Content Include="Views\TipoDeAutomovils\Edit.cshtml" />
+    <Content Include="Views\TipoDeAutomovils\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
