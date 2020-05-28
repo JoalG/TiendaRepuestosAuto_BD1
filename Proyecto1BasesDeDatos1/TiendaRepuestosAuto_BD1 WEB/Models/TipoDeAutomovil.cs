@@ -17,7 +17,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TipoDeAutomovil()
         {
-            this.Parte = new HashSet<Parte>();
+            this.ParteParaTipoDeAutomovil = new HashSet<ParteParaTipoDeAutomovil>();
         }
     
         public int ID_TipoDeAutomovil { get; set; }
@@ -28,6 +28,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
         public virtual FabricanteDeAutos FabricanteDeAutos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Parte> Parte { get; set; }
+        public virtual ICollection<ParteParaTipoDeAutomovil> ParteParaTipoDeAutomovil { get; set; }
     }
 }

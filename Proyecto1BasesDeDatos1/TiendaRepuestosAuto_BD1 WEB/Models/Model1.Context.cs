@@ -15,10 +15,10 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TiendaRepuestosAuto_BD1Entities2 : DbContext
+    public partial class TiendaRepuestosAuto_BD1Entities3 : DbContext
     {
-        public TiendaRepuestosAuto_BD1Entities2()
-            : base("name=TiendaRepuestosAuto_BD1Entities2")
+        public TiendaRepuestosAuto_BD1Entities3()
+            : base("name=TiendaRepuestosAuto_BD1Entities3")
         {
         }
     
@@ -37,8 +37,8 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public virtual DbSet<Orden> Orden { get; set; }
         public virtual DbSet<Organizacion> Organizacion { get; set; }
         public virtual DbSet<Parte> Parte { get; set; }
+        public virtual DbSet<ParteParaTipoDeAutomovil> ParteParaTipoDeAutomovil { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
-
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Proveido> Proveido { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

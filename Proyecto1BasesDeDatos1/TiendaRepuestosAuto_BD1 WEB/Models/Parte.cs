@@ -18,8 +18,8 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public Parte()
         {
             this.Detalle = new HashSet<Detalle>();
+            this.ParteParaTipoDeAutomovil = new HashSet<ParteParaTipoDeAutomovil>();
             this.Proveido = new HashSet<Proveido>();
-            this.TipoDeAutomovil = new HashSet<TipoDeAutomovil>();
         }
     
         public int ID_Parte { get; set; }
@@ -31,8 +31,8 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public virtual ICollection<Detalle> Detalle { get; set; }
         public virtual FabricanteDePiezas FabricanteDePiezas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveido> Proveido { get; set; }
+        public virtual ICollection<ParteParaTipoDeAutomovil> ParteParaTipoDeAutomovil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TipoDeAutomovil> TipoDeAutomovil { get; set; }
+        public virtual ICollection<Proveido> Proveido { get; set; }
     }
 }

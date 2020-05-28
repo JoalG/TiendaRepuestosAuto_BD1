@@ -4,24 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f116df6f54594e239f1849e75915a6f4" Name="Diagram1">
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.C__RefactorLog" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Cliente" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Contacto" Width="1.5" PointX="6.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Detalle" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.EstadoDeCliente" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.FabricanteDeAutos" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.FabricanteDePiezas" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Orden" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Organizacion" Width="1.5" PointX="4" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Parte" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Persona" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Proveedor" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Proveido" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.sysdiagrams" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Telefono" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.TelefonoProveedor" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.TipoDeAutomovil" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="1baa6a98faf544a7a33698f9e0a02ff8" Name="Diagram1">
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.C__RefactorLog" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Cliente" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Contacto" Width="1.5" PointX="6.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Detalle" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.EstadoDeCliente" Width="1.5" PointX="1.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.FabricanteDeAutos" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.FabricanteDePiezas" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Orden" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Organizacion" Width="1.5" PointX="4" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Parte" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Persona" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Proveedor" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Proveido" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.Telefono" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.TelefonoProveedor" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaRepuestosAuto_BD1Model.TipoDeAutomovil" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Cliente_Organizacion" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Cliente_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_EstadoDeCliente" ManuallyRouted="false" />
@@ -33,11 +34,12 @@
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Proveedor_Detalle" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_FabricanteDeAutos" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Parte_FabricanteDePiezas" ManuallyRouted="false" />
+        <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_ParteParaTipoDeAutomovil_Parte" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Proveido_Parte" ManuallyRouted="false" />
+        <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_ParteParaTipoDeAutomovil_TipoDeAutomovil" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Telefono_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_Proveido_Proveedor" ManuallyRouted="false" />
         <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.FK_TelefonoProveedor_Proveedor" ManuallyRouted="false" />
-        <AssociationConnector Association="TiendaRepuestosAuto_BD1Model.ParteParaTipoDeAutomovil" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,7 +14,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class PartesController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities2 db = new TiendaRepuestosAuto_BD1Entities2();
+        private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
 
         // GET: Partes
         public ActionResult Index()
