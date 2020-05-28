@@ -17,9 +17,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
 
         // GET: Partes
-        public ActionResult Index()
+        public ActionResult Index(string NombreParte)
         {
-            var parte = db.Parte.Include(p => p.FabricanteDePiezas);
+            var parte = db.Parte.Include(p => p.FabricanteDePiezas).Where(p => p.Nombre.StartsWith(NombreParte) || NombreParte == null);
             return View(parte.ToList());
         }
 

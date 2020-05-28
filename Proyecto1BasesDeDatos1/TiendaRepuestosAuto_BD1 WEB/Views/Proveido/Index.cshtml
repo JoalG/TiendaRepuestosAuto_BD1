@@ -9,19 +9,43 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<p>
+    @using (Html.BeginForm("Index", "Proveido", FormMethod.Get))
+    {
+        <style>
+            label {
+                text-align: left;
+                width: 100px;
+                display: block;
+                float: left;
+                clear: right;
+                font-size: 18;
+            }
+        </style>
+
+        <b>Buscar partes y proveedores</b><br /><br />
+        <label for="NombreParte"> Parte: </label>
+        <input type="text" id="NombreParte" name="NombreParte"><br>
+        <label for="NombreProveedor"> Proveedor: </label>
+        <input type="text" id="NombreProveedor" name="NombreProveedor"><br>
+        <input type="submit" value="Buscar">
+    }
+</p>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayName("Ganancia")
-        </th>
-        <th>
-            @Html.DisplayName("Precio")
-        </th>
         <th>
             @Html.DisplayName("Parte")
         </th>
         <th>
             @Html.DisplayName("Proveedor")
+        </th>
+        <th>
+            @Html.DisplayName("Ganancia")
+        </th>
+        <th>
+            @Html.DisplayName("Precio")
         </th>
         <th></th>
     </tr>
@@ -29,16 +53,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Ganancia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Parte.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ganancia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id1 = item.ID_Proveedor, id2 = item.ID_Parte}) |

@@ -9,6 +9,28 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<p>
+    @using (Html.BeginForm("Index", "Partes", FormMethod.Get))
+    {
+        <style>
+            label {
+                text-align: left;
+                width: 100px;
+                display: block;
+                float: left;
+                clear: right;
+                font-size: 18;
+            }
+        </style>
+
+        <b>Buscar parte</b><br /><br />
+        <label for="NombreParte"> Parte: </label>
+        <input type="text" id="NombreParte" name="NombreParte"><br>
+        <input type="submit" value="Buscar">
+    }
+</p>
+
 <table class="table">
     <tr>
         <th>

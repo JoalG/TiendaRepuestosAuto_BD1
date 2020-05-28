@@ -17,9 +17,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
 
         // GET: Proveido
-        public ActionResult Index()
+        public ActionResult Index(string NombreParte, string NombreProveedor)
         {
-            var proveido = db.Proveido.Include(p => p.Parte).Include(p => p.Proveedor);
+            var proveido = db.Proveido.Include(p => p.Parte).Include(p => p.Proveedor).Where(p => p.Parte.Nombre.StartsWith(NombreParte) || NombreParte == null).Where(p => p.Proveedor.Nombre.StartsWith(NombreProveedor) || NombreProveedor == null);
             return View(proveido.ToList());
         }
 

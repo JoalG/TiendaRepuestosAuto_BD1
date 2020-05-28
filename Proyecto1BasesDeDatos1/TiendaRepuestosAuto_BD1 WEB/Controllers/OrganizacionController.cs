@@ -17,9 +17,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
 
         // GET: Organizacion
-        public ActionResult Index()
+        public ActionResult Index(string Nombre, int? CedulaJuridica)
         {
-            var organizacions = db.Organizacion.Include(o => o.Cliente).Include(o => o.Contacto);
+            var organizacions = db.Organizacion.Include(o => o.Cliente).Include(o => o.Contacto).Where(o => o.Nombre.StartsWith(Nombre) || Nombre == null).Where(o => o.CedulaJuridica.ToString().StartsWith(CedulaJuridica.ToString()) || CedulaJuridica == null);
             return View(organizacions.ToList());
         }
 

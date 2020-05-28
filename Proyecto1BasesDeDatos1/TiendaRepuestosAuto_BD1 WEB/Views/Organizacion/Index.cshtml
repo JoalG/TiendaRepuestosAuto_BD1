@@ -9,6 +9,30 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<p>
+    @using (Html.BeginForm("Index", "Organizacion", FormMethod.Get))
+    {
+        <style>
+            label {
+                text-align: left;
+                width: 150px;
+                display: block;
+                float: left;
+                clear: right;
+                font-size: 18;
+            }
+        </style>
+
+        <b>Buscar personas</b><br /><br />
+        <label for="Nombre"> Nombre: </label>
+        <input type="text" id="Nombre" name="Nombre"><br>
+        <label for="CedulaJuridica"> Cedula Juridica: </label>
+        <input type="number" id="CedulaJuridica" name="CedulaJuridica"><br>
+        <input type="submit" value="Buscar">
+    }
+</p>
+
 <table class="table">
     <tr>
         <th>
