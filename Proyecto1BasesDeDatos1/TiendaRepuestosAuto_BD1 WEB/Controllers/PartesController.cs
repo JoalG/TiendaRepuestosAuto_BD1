@@ -149,7 +149,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ID_TipoDeAutomovil = 1,
                 nombreParte = parte.Nombre
             };
-            ViewBag.ID_TipoDeAutomovil = new SelectList(db.TipoDeAutomovil, "ID_TipoDeAUtomovil", "Nombre");
+            ViewBag.ID_TipoDeAutomovil = new SelectList(db.TipoDeAutomovil, "ID_TipoDeAutomovil", "Modelo");
             return View(parteT);
         }
 
