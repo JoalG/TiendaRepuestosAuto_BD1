@@ -21,5 +21,11 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
 
         [Display(Name = "Fabricante")]
         public int ID_FabricanteDePiezas { get; set; }
+
+        public int ID_Parte { get; set; }
+
+        public List<TipoDeAutomovil> tiposDeAuto { get; set; }
+
+        public FabricanteDePiezas FabricanteDePiezas { get; set; }
     }
 }

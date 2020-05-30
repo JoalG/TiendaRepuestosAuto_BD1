@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -35,7 +36,28 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 return HttpNotFound();
             }
-            return View(parte);
+            var IDsTiposDeAutomovil = db.spFindTiposDeAutoMovilForParte(parte.ID_Parte).ToList();
+            //IDsTiposDeAutomovil.ToList();
+
+            List<TipoDeAutomovil> tipos = new List<TipoDeAutomovil>();
+
+            foreach (var item in IDsTiposDeAutomovil)
+            {
+                tipos.Add(db.TipoDeAutomovil.Find(item.GetValueOrDefault()));
+            }
+
+            ParteModelo parteModelo = new ParteModelo
+            {
+                ID_Parte = parte.ID_Parte,
+                FabricanteDePiezas = parte.FabricanteDePiezas,
+                ID_FabricanteDePiezas = parte.ID_FabricanteDePiezas,
+                Nombre = parte.Nombre,
+                Marca = parte.Marca,
+                tiposDeAuto = tipos
+            };
+
+            //ViewBag.tiposA = tipos;
+            return View(parteModelo);
         }
 
         // GET: Partes/Create
@@ -149,19 +171,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ID_TipoDeAutomovil = 1,
                 nombreParte = parte.Nombre
             };
-
-            /*
-            var tipoDeAutomovil = db.TipoDeAutomovil.Include(t => t.FabricanteDeAutos);
-
-            tipoDeAutomovil.ToList();
-
-            var tipos = from t in tipoDeAutomovil
-                        select new SelectList
-                        {
-                            Value = t.ID_TipoDeAutomovil,
-                            Text = $"{t.Modelo}-- £{t.Año}"
-                        };
-            */
 
             var tipos = db.TipoDeAutomovil
                 .Where(x => x.ID_TipoDeAutomovil == x.ID_TipoDeAutomovil)

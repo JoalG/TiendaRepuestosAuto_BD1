@@ -469,5 +469,14 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderPersona", cedulaParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> spFindTiposDeAutoMovilForParte(Nullable<int> iD_Parte)
+        {
+            var iD_ParteParameter = iD_Parte.HasValue ?
+                new ObjectParameter("ID_Parte", iD_Parte) :
+                new ObjectParameter("ID_Parte", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spFindTiposDeAutoMovilForParte", iD_ParteParameter);
+        }
     }
 }

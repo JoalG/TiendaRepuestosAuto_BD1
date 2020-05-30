@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -501,6 +501,9 @@
         <Function Name="spFindProveedorParaParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spFindTiposDeAutoMovilForParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Parte" Type="int" Mode="In" />
+        </Function>
         <Function Name="spModifyOrganizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedulaJuridica" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -617,8 +620,7 @@
             <End Role="TelefonoProveedor" EntitySet="TelefonoProveedor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaRepuestosAuto_BD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1236,7 +1238,7 @@
             <Parameter Name="Año" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spFindProveedorParaParte" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spFindProveedorParaParte_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spModifyOrganizacion">
             <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
@@ -1261,10 +1263,13 @@
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spSuspenderOrganizacion">
-            <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
+          <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spSuspenderPersona">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spFindTiposDeAutoMovilForParte" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1523,6 +1528,7 @@
           <FunctionImportMapping FunctionImportName="spModifyPrecioParteDeProvedor" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyPrecioParteDeProvedor" />
           <FunctionImportMapping FunctionImportName="spSuspenderOrganizacion" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderOrganizacion" />
           <FunctionImportMapping FunctionImportName="spSuspenderPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderPersona" />
+          <FunctionImportMapping FunctionImportName="spFindTiposDeAutoMovilForParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spFindTiposDeAutoMovilForParte" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
