@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/jquery-ui.css")
+
 
     <style>
         /* The navigation menu */
@@ -100,7 +102,7 @@
             z-index: 1;
         }
 
-        /* Links inside the dropdown */
+            /* Links inside the dropdown */
             .mynav_dropdown-content a {
                 color: black;
                 padding: 12px 16px;
@@ -165,6 +167,24 @@
                         @Html.ActionLink("Listar parte con proveedor", "Index", "Proveido")
                     </div>
                 </div>
+
+                <div class="mynav_subnav">
+                    <button class="mynav_subnavbtn">Orden <i class="fa fa-caret-down"></i></button>
+                    <div class="mynav_subnav-content">
+                        <div class="mynav_dropdown">
+                            <button class="mynav_dropbtn">  Crear Para  <i class="fa fa-caret-down"></i></button>
+                            <div class="mynav_dropdown-content">
+                                @Html.ActionLink("Persona", "CreateParaPersona", "Orden")
+                                @Html.ActionLink("Organizacion", "CreateParaOrganizacion", "Orden")
+                            </div>
+                        </div>
+
+                        @Html.ActionLink("Listar Partes", "Index", "Orden")
+                    </div>
+                    
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -178,6 +198,10 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/DatePickerReady.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
