@@ -38,41 +38,13 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             return View(orden);
         }
 
-        // GET: Orden/Create
-        public ActionResult Create()
-        {
-            ViewBag.ID_Cliente = new SelectList(db.Cliente, "ID_Cliente", "Direccion");
-            return View();
-        }
-
-        // POST: Orden/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create( OrdenModel orden)
-        {
-            if (ModelState.IsValid)
-            {
-
-                db.spAddOrden(orden.ID_Cliente, orden.Fecha);
-              
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ID_Cliente = new SelectList(db.Cliente, "ID_Cliente", "Direccion", orden.ID_Cliente);
-            return View(orden);
-        }
-
-
-
         public ActionResult CreateParaPersona()
         {
             ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
             return View();
         }
 
-     
+
 
         public ActionResult CreateParaOrganizacion()
         {
@@ -80,8 +52,46 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             return View();
         }
 
-        
 
+
+        // POST: Orden/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateParaPersona(OrdenModel orden)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.spAddOrden(orden.ID_Cliente, orden.Fecha);
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
+            return View(orden);
+        }
+
+
+        // POST: Orden/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateParaOrganizacion(OrdenModel orden)
+        {
+            if (ModelState.IsValid)
+            {
+
+                db.spAddOrden(orden.ID_Cliente, orden.Fecha);
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ID_Cliente = new SelectList(db.Organizacion, "ID_Cliente", "Nombre");
+            return View(orden);
+        }
 
 
         // GET: Orden/Edit/5
