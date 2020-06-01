@@ -7,115 +7,122 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TiendaRepuestosAuto_BD1_WEB.Models;
+using TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp;
 
 namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
-    public class ContactoController : Controller
+    public class TelefonoesController : Controller
     {
         private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
 
-        // GET: Contacto
+        // GET: Telefonoes
         public ActionResult Index()
         {
-            var contacto = db.Contacto.Include(c => c.Organizacion1);
-            return View(contacto.ToList());
+            var telefono = db.Telefono.Include(t => t.Persona);
+            return View(telefono.ToList());
         }
 
-        // GET: Contacto/Details/5
+        // GET: Telefonoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contacto.Find(id);
-            if (contacto == null)
+            Telefono telefono = db.Telefono.Find(id);
+            if (telefono == null)
             {
                 return HttpNotFound();
             }
-            return View(contacto);
+            return View(telefono);
         }
 
-        // GET: Contacto/Create
+        // GET: Telefonoes/Create
         public ActionResult Create()
         {
-            ViewBag.CedulaJuridica = new SelectList(db.Organizacion, "CedulaJuridica", "Nombre");
+            ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre");
             return View();
         }
 
-        // POST: Contacto/Create
+        // POST: Telefonoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Contacto,Nombre,Telefono,Cargo,CedulaJuridica")] Contacto contacto)
+        public ActionResult Create([Bind(Include = "ID_Telefono,NumeroDeTelefono,Cedula")] Telefono telefono)
         {
             if (ModelState.IsValid)
             {
-                db.Contacto.Add(contacto);
+                db.Telefono.Add(telefono);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CedulaJuridica = new SelectList(db.Organizacion, "CedulaJuridica", "Nombre", contacto.CedulaJuridica);
-            return View(contacto);
+            ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre", telefono.Cedula);
+            return View(telefono);
         }
 
-        // GET: Contacto/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Telefonoes/Edit/5
+        public ActionResult Edit(int? id, string Nombre)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contacto.Find(id);
-            if (contacto == null)
+            Telefono telefono = db.Telefono.Find(id);
+            if (telefono == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CedulaJuridica = new SelectList(db.Organizacion, "CedulaJuridica", "Nombre", contacto.CedulaJuridica);
-            return View(contacto);
+            TelefonoModel tel = new TelefonoModel
+            {
+                Cedula = telefono.Cedula,
+                ID_Telefono = telefono.ID_Telefono,
+                Nombre = Nombre,
+                NumeroDeTelefono = telefono.NumeroDeTelefono
+            };
+            return View(tel);
         }
 
-        // POST: Contacto/Edit/5
+        // POST: Telefonoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Contacto,Nombre,Telefono,Cargo,CedulaJuridica")] Contacto contacto)
+        public ActionResult Edit([Bind(Include = "ID_Telefono,NumeroDeTelefono,Cedula")] Telefono telefono)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contacto).State = EntityState.Modified;
+                db.Entry(telefono).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CedulaJuridica = new SelectList(db.Organizacion, "CedulaJuridica", "Nombre", contacto.CedulaJuridica);
-            return View(contacto);
+            ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre", telefono.Cedula);
+            return View(telefono);
         }
 
-        // GET: Contacto/Delete/5
+        // GET: Telefonoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contacto.Find(id);
-            if (contacto == null)
+            Telefono telefono = db.Telefono.Find(id);
+            if (telefono == null)
             {
                 return HttpNotFound();
             }
-            return View(contacto);
+            return View(telefono);
         }
 
-        // POST: Contacto/Delete/5
+        // POST: Telefonoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contacto contacto = db.Contacto.Find(id);
-            db.Contacto.Remove(contacto);
+            Telefono telefono = db.Telefono.Find(id);
+            db.Telefono.Remove(telefono);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

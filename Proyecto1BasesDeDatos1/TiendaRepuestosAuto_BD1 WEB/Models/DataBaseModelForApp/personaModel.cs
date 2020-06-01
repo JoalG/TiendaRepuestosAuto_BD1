@@ -32,5 +32,12 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
         [Display(Name = "Estado")]
         public int ID_EstadoDeCliente { get; set; }
 
+        [Display(Name = "Número de Teléfono")]
+        [Range(10000000,99999999, ErrorMessage = "Número inválido")]
+        [Required(ErrorMessage = "Ingrese un número de teléfono")]
+        public long NumeroDeTelefono { get; set; }
+
+        public List<Telefono> telefonos { get; set; }
+
     }
 }

@@ -14,7 +14,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class OrganizacionController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
+        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
 
         // GET: Organizacion
         public ActionResult Index(string Nombre, int? CedulaJuridica)

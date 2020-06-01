@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TiendaRepuestosAuto_BD1_WEB.Models.Orden>
+﻿@model IEnumerable<TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp.OrdenModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,19 +6,16 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IVA)
+            @Html.DisplayName("Cliente")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente.Direccion)
+            @Html.DisplayName("IVA")
         </th>
         <th></th>
     </tr>
@@ -29,10 +26,10 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IVA)
+            @Html.DisplayFor(modelItem => item.nombreDeCliente)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cliente.Direccion)
+            @Html.DisplayFor(modelItem => item.IVA)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID_Orden }) |

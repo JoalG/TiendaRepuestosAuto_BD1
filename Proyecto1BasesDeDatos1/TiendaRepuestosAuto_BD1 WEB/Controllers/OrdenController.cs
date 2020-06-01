@@ -13,14 +13,43 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class OrdenController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
+        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
 
         // GET: Orden
         public ActionResult Index()
         {
 
-            var orden = db.Orden.Include(o => o.Cliente);
-            return View(orden.ToList());
+            List<OrdenModel> ordenes = new List<OrdenModel>();  
+
+            var ordenesPersona = db.spGetOrdenesPersona().ToList();
+            foreach(var item in ordenesPersona)
+            {
+                OrdenModel ordenActual = new OrdenModel
+                {
+                    ID_Orden = item.ID_Orden,
+                    ID_Cliente = item.ID_Cliente,
+                    Fecha = item.Fecha,
+                    nombreDeCliente = item.Nombre,
+                    IVA = item.IVA
+                };
+                ordenes.Add(ordenActual);
+            }
+
+            var ordenesOrganizacion = db.spGetOrdenesOrganizacion().ToList();
+            foreach (var item in ordenesOrganizacion)
+            {
+                OrdenModel ordenActual = new OrdenModel
+                {
+                    ID_Orden = item.ID_Orden,
+                    ID_Cliente = item.ID_Cliente,
+                    Fecha = item.Fecha,
+                    nombreDeCliente = item.Nombre,
+                    IVA = item.IVA
+                };
+                ordenes.Add(ordenActual);
+            }
+
+            return View(ordenes);
         }
 
         // GET: Orden/Details/5

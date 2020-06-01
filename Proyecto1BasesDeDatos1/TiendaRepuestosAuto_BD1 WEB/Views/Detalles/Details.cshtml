@@ -1,0 +1,50 @@
+﻿@model TiendaRepuestosAuto_BD1_WEB.Models.Detalle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Detalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Orden.ID_Orden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orden.ID_Orden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parte.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parte.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proveedor.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

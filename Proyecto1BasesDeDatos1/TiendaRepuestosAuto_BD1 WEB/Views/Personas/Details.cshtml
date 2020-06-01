@@ -1,4 +1,4 @@
-﻿@model TiendaRepuestosAuto_BD1_WEB.Models.Persona
+﻿@model TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp.personaModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
 
@@ -19,15 +26,44 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cliente.Direccion)
+            @Html.DisplayNameFor(model => model.Ciudad)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cliente.Direccion)
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
         </dd>
 
     </dl>
 </div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Números de telfono")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.telefonos)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroDeTelefono)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { controller = "Telefonoes", id = item.ID_Telefono, Nombre = Model.nombre})
+            </td>
+        </tr>
+    }
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Cedula }) |
     @Html.ActionLink("Back to List", "Index")

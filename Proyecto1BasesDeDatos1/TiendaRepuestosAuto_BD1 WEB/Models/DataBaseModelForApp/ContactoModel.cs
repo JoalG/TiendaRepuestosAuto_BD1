@@ -15,6 +15,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
         public string Nombre { get; set; }
 
         [Display(Name = "Número de telefono")]
+        [Range(10000000, 99999999, ErrorMessage = "Número inválido")]
         [Required(ErrorMessage = "Tiene que ingresar su número de telefono")]
         public long Telefono { get; set; }
 

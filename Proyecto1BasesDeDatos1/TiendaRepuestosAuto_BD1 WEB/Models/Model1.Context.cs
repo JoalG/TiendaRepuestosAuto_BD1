@@ -15,10 +15,10 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TiendaRepuestosAuto_BD1Entities3 : DbContext
+    public partial class TiendaRepuestosAuto_BD1Entities4 : DbContext
     {
-        public TiendaRepuestosAuto_BD1Entities3()
-            : base("name=TiendaRepuestosAuto_BD1Entities3")
+        public TiendaRepuestosAuto_BD1Entities4()
+            : base("name=TiendaRepuestosAuto_BD1Entities4")
         {
         }
     
@@ -351,6 +351,15 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spBorrarParte", iD_ParteParameter, opReturn);
         }
     
+        public virtual int spFindNameCliente(Nullable<int> iD_Cliente, ObjectParameter opReturn)
+        {
+            var iD_ClienteParameter = iD_Cliente.HasValue ?
+                new ObjectParameter("ID_Cliente", iD_Cliente) :
+                new ObjectParameter("ID_Cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spFindNameCliente", iD_ClienteParameter, opReturn);
+        }
+    
         public virtual ObjectResult<spFindPartePorModeloAño_Result> spFindPartePorModeloAño(string model, Nullable<int> año)
         {
             var modelParameter = model != null ?
@@ -371,6 +380,25 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("nombre", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spFindProveedorParaParte_Result>("spFindProveedorParaParte", nombreParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spFindTiposDeAutoMovilForParte(Nullable<int> iD_Parte)
+        {
+            var iD_ParteParameter = iD_Parte.HasValue ?
+                new ObjectParameter("ID_Parte", iD_Parte) :
+                new ObjectParameter("ID_Parte", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spFindTiposDeAutoMovilForParte", iD_ParteParameter);
+        }
+    
+        public virtual ObjectResult<spGetOrdenesOrganizacion_Result> spGetOrdenesOrganizacion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetOrdenesOrganizacion_Result>("spGetOrdenesOrganizacion");
+        }
+    
+        public virtual ObjectResult<spGetOrdenesPersona_Result> spGetOrdenesPersona()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetOrdenesPersona_Result>("spGetOrdenesPersona");
         }
     
         public virtual int spModifyOrganizacion(Nullable<int> cedulaJuridica, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, string nombreContacto, Nullable<long> telefono, string cargo)
@@ -468,15 +496,6 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("cedula", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderPersona", cedulaParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> spFindTiposDeAutoMovilForParte(Nullable<int> iD_Parte)
-        {
-            var iD_ParteParameter = iD_Parte.HasValue ?
-                new ObjectParameter("ID_Parte", iD_Parte) :
-                new ObjectParameter("ID_Parte", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spFindTiposDeAutoMovilForParte", iD_ParteParameter);
         }
     }
 }

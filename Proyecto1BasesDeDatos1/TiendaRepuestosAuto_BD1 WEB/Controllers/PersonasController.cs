@@ -15,7 +15,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class PersonasController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities3 db = new TiendaRepuestosAuto_BD1Entities3();
+        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
 
         // GET: Personas
         public ActionResult Index(string Nombre, int? Cedula)
@@ -32,11 +32,21 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Persona persona = db.Persona.Find(id);
+            List<Telefono> telefonosL = db.Telefono.Where(t => t.Cedula == id).ToList();
+
+            personaModel personaModel = new personaModel
+            {
+                Cedula = persona.Cedula,
+                nombre = persona.nombre,
+                Ciudad = persona.Cliente.Ciudad,
+                Direccion = persona.Cliente.Direccion,
+                telefonos = telefonosL
+            };
             if (persona == null)
             {
                 return HttpNotFound();
             }
-            return View(persona);
+            return View(personaModel);
         }
 
         // GET: Personas/Create
@@ -52,7 +62,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cliente cliente, Persona persona)
+        public ActionResult Create(Cliente cliente, Persona persona, Telefono telefono)
         {
             if (ModelState.IsValid )
             {
@@ -66,6 +76,12 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ObjectParameter result = new ObjectParameter("OpReturn",typeof(string));
                 db.spAddClienteAndPersona2(persona.Cedula, persona.nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, result);
                 System.Diagnostics.Debug.WriteLine(result.ToString());
+                if(db.Persona.Find(persona.Cedula) != null)
+                {
+                    telefono.Cedula = persona.Cedula;
+                    db.Telefono.Add(telefono);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
             else
