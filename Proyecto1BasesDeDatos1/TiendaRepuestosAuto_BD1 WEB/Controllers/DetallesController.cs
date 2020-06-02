@@ -58,12 +58,16 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         }
 
         // GET: Detalles/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.ID_Orden = new SelectList(db.Orden, "ID_Orden", "ID_Orden");
             ViewBag.Partes = new SelectList(db.Parte, "ID_Parte", "Nombre");
             ViewBag.ID_Proveedor = new SelectList(db.Proveedor, "ID_Proveedor", "Nombre");
-            return View();
+            DetalleModel detalle = new DetalleModel
+            {
+                ID_Orden = id
+            };
+            return View(detalle);
         }
 
         // POST: Detalles/Create
@@ -76,7 +80,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             if (ModelState.IsValid)
             {
                 db.spAddDetalleOrden(detalle.ID_Orden, detalle.ID_Proveedor, detalle.ID_Parte, detalle.Cantidad);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { Controller = "Orden", id = detalle.ID_Orden });
             }
 
             ViewBag.ID_Orden = new SelectList(db.Orden, "ID_Orden", "ID_Orden", detalle.ID_Orden);

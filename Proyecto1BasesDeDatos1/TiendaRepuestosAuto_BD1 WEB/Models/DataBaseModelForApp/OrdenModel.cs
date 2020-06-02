@@ -18,5 +18,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
 
         public decimal IVA { get; set; }
 
+        public List<Detalle> detalles { get; set; }
+
     }
 }

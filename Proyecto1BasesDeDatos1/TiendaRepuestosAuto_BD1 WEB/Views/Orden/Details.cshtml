@@ -1,4 +1,4 @@
-﻿@model TiendaRepuestosAuto_BD1_WEB.Models.Orden
+﻿@model TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp.OrdenModel
 
 @{
     ViewBag.Title = "Details";
@@ -27,16 +27,48 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cliente.Direccion)
+            @Html.DisplayNameFor(model => model.nombreDeCliente)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cliente.Direccion)
+            @Html.DisplayFor(model => model.nombreDeCliente)
         </dd>
-
     </dl>
+
+    <p>
+        @Html.ActionLink("Agregar Detalle", "Create", new { controller = "Detalles", id = Model.ID_Orden})
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Parte")
+            </th>
+            <th>
+                @Html.DisplayName("Proveedor")
+            </th>
+            <th>
+                @Html.DisplayName("Cantidad")
+            </th>
+        </tr>
+
+        @foreach (var item in Model.detalles)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parte.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Orden }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

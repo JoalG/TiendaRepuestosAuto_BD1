@@ -64,8 +64,44 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 return HttpNotFound();
             }
-            return View(orden);
+
+            OrdenModel ordenModel = new OrdenModel
+            {
+                ID_Orden = orden.ID_Orden,
+                IVA = orden.IVA,
+                ID_Cliente = orden.ID_Cliente,
+                Fecha = orden.Fecha,
+                nombreDeCliente = getNombreFromClienteInOrden(orden.ID_Orden),
+                detalles = db.Detalle.Include(p => p.Parte).Include(p => p.Proveedor).Where(d => d.ID_Orden == orden.ID_Orden).ToList()
+            };
+            return View(ordenModel);
         }
+
+
+        public string getNombreFromClienteInOrden(int ID_Orden)
+        {
+            var clientesPersona = db.spGetOrdenesPersona().ToList();
+            foreach(var item in clientesPersona)
+            {
+                if (item.ID_Orden == ID_Orden)
+                {
+                    return item.Nombre;
+                }
+            }
+
+            var clientesOrganizacion = db.spGetOrdenesOrganizacion().ToList();
+            foreach (var item in clientesPersona)
+            {
+                if (item.ID_Orden == ID_Orden)
+                {
+                    return item.Nombre;
+                }
+            }
+
+            return "Not Found";
+        }
+
+
 
         public ActionResult CreateParaPersona()
         {

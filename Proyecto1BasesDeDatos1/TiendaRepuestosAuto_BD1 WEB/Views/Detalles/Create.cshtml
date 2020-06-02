@@ -78,10 +78,12 @@
         </div>
     </div>
 
+    @Html.HiddenFor(model => model.ID_Orden)
+
     <div class="form-group">
-        @Html.LabelFor(model => model.ID_Orden, "ID_Orden", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ID_Orden, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("ID_Orden", null, htmlAttributes: new { @class = "form-control" })
+            @Html.DisplayFor(model => model.ID_Orden, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ID_Orden, "", new { @class = "text-danger" })
         </div>
     </div>
