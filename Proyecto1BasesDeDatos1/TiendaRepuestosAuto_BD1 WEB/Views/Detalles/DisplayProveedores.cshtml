@@ -1,0 +1,11 @@
+﻿@model TiendaRepuestosAuto_BD1_WEB.Models.Proveedor
+
+<option value="">--Select Proveedores--</option>
+
+@if(ViewBag.Proveedores != null)
+{
+    foreach(var item in ViewBag.Proveedores)
+    {
+        <option  value="@item.Value">@item.Text</option>
+    }
+}

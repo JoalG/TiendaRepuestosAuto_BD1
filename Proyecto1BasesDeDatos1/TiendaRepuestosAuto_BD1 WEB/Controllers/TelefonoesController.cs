@@ -38,10 +38,16 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         }
 
         // GET: Telefonoes/Create
-        public ActionResult Create()
+        public ActionResult Create(int Cedula,string nombre )
         {
-            ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre");
-            return View();
+            TelefonoModel telf = new TelefonoModel
+            {
+                Nombre = nombre,
+                Cedula = Cedula,
+
+            };
+
+            return View(telf);
         }
 
         // POST: Telefonoes/Create
@@ -55,6 +61,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 db.Telefono.Add(telefono);
                 db.SaveChanges();
+                return RedirectToAction("Edit", new { Controller="Personas", id = telefono.Cedula });  
                 return RedirectToAction("Index");
             }
 

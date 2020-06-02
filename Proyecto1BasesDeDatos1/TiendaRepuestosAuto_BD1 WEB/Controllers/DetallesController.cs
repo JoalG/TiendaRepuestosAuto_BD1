@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -43,7 +44,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             var proveidos = db.Proveido.Include(p => p.Proveedor).Where(p => p.ID_Parte == ID_Parte).ToList();
 
             List<ProveedorModel> proveedores = new List<ProveedorModel>();
-            foreach(var item in proveidos)
+            foreach (var item in proveidos)
             {
                 ProveedorModel proveedor = new ProveedorModel
                 {
@@ -70,12 +71,11 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Detalle,Cantidad,ID_Proveedor,ID_Parte,ID_Orden")] Detalle detalle)
+        public ActionResult Create(DetalleModel detalle)
         {
             if (ModelState.IsValid)
             {
-                db.Detalle.Add(detalle);
-                db.SaveChanges();
+                db.spAddDetalleOrden(detalle.ID_Orden, detalle.ID_Proveedor, detalle.ID_Parte, detalle.Cantidad);
                 return RedirectToAction("Index");
             }
 
@@ -155,6 +155,21 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        } 
+
+        public ActionResult GetProveedors(int ID_Parte)
+        {
+            List<Proveido> proveidos = db.Proveido.Where(x => x.ID_Parte == ID_Parte).ToList();
+            List<Proveedor> proveedores = new List<Proveedor>();
+            foreach( var proveido in proveidos)
+            {
+                proveedores.Add(db.Proveedor.Find( proveido.ID_Proveedor));
+            }
+            //ViewBag.ID_Orden = new SelectList(db.Orden, "ID_Orden", "ID_Orden");
+            ViewBag.Proveedores = new SelectList(proveedores, "ID_Proveedor", "nombre");
+
+
+            return PartialView("DisplayProveedores");
         }
     }
 }

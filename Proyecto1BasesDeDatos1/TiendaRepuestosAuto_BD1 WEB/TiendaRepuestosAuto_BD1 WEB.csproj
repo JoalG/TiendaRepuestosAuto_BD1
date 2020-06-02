@@ -356,6 +356,7 @@
     <Content Include="Views\Telefonoes\Details.cshtml" />
     <Content Include="Views\Telefonoes\Edit.cshtml" />
     <Content Include="Views\Telefonoes\Index.cshtml" />
+    <Content Include="Views\Detalles\DisplayProveedores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

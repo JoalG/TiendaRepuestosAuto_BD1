@@ -65,7 +65,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Agregar Telefono", "Create", new { controller = "Telefonoes", Cedula = Model.Cedula, nombre = Model.nombre })
 </div>
 
 @section Scripts {
