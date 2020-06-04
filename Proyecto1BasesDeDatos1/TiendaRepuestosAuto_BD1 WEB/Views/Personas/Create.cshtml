@@ -71,6 +71,28 @@
             </div>
         </div>
     </div>
+    if (ViewBag.Message != null)
+    {
+        bool result = ViewBag.Resultado;
+
+        if (result)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location.href = "/Organizacion/Index"
+            }
+            </script>
+        }
+        else
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            }
+            </script>
+        }
+    }
 }
 
 <div>

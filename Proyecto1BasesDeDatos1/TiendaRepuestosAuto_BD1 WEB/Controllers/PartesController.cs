@@ -81,7 +81,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre", parte.ID_FabricanteDePiezas);
+            ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre");
             return View(parte);
         }
 

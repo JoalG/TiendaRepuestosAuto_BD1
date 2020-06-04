@@ -58,7 +58,36 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 ObjectParameter result = new ObjectParameter("opReturn", typeof(string));
                 db.spAddClienteAndOrganizacion(organizacion.CedulaJuridica, organizacion.Nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, contacto.Nombre, contacto.Telefono, contacto.Cargo, result);
-                return RedirectToAction("Index");
+                
+                OrganizacionModel organizacionModel = new OrganizacionModel
+                {
+                    CedulaJuridica = organizacion.CedulaJuridica,
+                    Nombre = organizacion.Nombre,
+                    Direccion = cliente.Direccion,
+                    Ciudad = cliente.Ciudad,
+                    ID_EstadoDeCliente = cliente.ID_EstadoDeCliente,
+                    Contacto = new ContactoModel
+                    {
+                        Telefono = contacto.Telefono,
+                        Cargo = contacto.Cargo,
+                        Nombre = contacto.Nombre
+                    }
+
+                };
+
+                if (result.Value.ToString() == "Record Inserted Successfully")
+                {
+                    ViewBag.Resultado = true;
+                }
+                else
+                {
+                    ViewBag.Resultado = false;
+                }
+
+                ViewBag.Message = result.Value.ToString();
+                ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo");
+                return View(organizacionModel);
+
             }
 
             ViewBag.ID_Cliente = new SelectList(db.Cliente, "ID_Cliente", "Direccion", organizacion.ID_Cliente);

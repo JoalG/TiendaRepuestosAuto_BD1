@@ -82,7 +82,28 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                     db.Telefono.Add(telefono);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                personaModel personaModel = new personaModel
+                {
+                    Cedula = persona.Cedula,
+                    nombre = persona.nombre,
+                    Direccion = cliente.Direccion,
+                    Ciudad = cliente.Ciudad,
+                    ID_EstadoDeCliente = cliente.ID_EstadoDeCliente,
+                    NumeroDeTelefono = telefono.NumeroDeTelefono
+                };
+
+                if (result.Value.ToString() == "Record Inserted Successfully")
+                {
+                    ViewBag.Resultado = true;
+                }
+                else
+                {
+                    ViewBag.Resultado = false;
+                }
+
+                ViewBag.Message = result.Value.ToString();
+                ViewBag.ID_EstadoDeCliente = new SelectList(db.EstadoDeCliente, "ID_EstadoDeCliente", "Tipo");
+                return View(personaModel);
             }
             else
             {
