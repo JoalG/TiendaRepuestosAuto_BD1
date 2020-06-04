@@ -18,10 +18,32 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
 
         // GET: Partes
-        public ActionResult Index(string NombreParte)
+        public ActionResult Index(string ModeloFind, int? AnnoFind)
         {
-            var parte = db.Parte.Include(p => p.FabricanteDePiezas).Where(p => p.Nombre.StartsWith(NombreParte) || NombreParte == null);
-            return View(parte.ToList());
+            
+            if(ModeloFind != null && AnnoFind != null)
+            {
+                List<Parte> partes = new List<Parte>();
+                var partesPorModeloAnno = db.spFindPartePorModeloAño(ModeloFind, AnnoFind).ToList();
+                foreach(var item in partesPorModeloAnno)
+                {
+                    var parte = new Parte
+                    {
+                        ID_Parte = item.ID_Parte,
+                        Nombre = item.Nombre,
+                        Marca = item.Marca,
+                        ID_FabricanteDePiezas = item.ID_FabricanteDePiezas,
+                        FabricanteDePiezas = db.FabricanteDePiezas.Find(item.ID_FabricanteDePiezas)
+                    };
+                    partes.Add(parte);
+                }
+                return View(partes);
+            }
+            else
+            {
+                var partes = db.Parte.Include(f => f.FabricanteDePiezas).ToList();
+                return View(partes);
+            }
         }
 
         // GET: Partes/Details/5
