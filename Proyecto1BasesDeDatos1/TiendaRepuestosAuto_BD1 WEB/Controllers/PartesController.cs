@@ -78,7 +78,19 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
                 db.spAddParte(parte.Nombre, parte.Marca, parte.ID_FabricanteDePiezas, result);
-                return RedirectToAction("Index");
+
+                if (result.Value.ToString() == "Record Inserted Successfully")
+                {
+                    ViewBag.Resultado = true;
+                }
+                else
+                {
+                    ViewBag.Resultado = false;
+                }
+
+                ViewBag.Message = result.Value.ToString();
+                ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre");
+                return View(parte);
             }
 
             ViewBag.ID_FabricanteDePiezas = new SelectList(db.FabricanteDePiezas, "ID_FabricanteDePiezas", "Nombre");
