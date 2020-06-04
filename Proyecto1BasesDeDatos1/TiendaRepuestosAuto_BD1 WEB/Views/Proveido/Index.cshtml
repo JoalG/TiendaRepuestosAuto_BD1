@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Asociaciones Partes con Proveedor</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nueva asociación", "Create")
 </p>
 
 <p>
@@ -65,7 +65,7 @@
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id1 = item.ID_Proveedor, id2 = item.ID_Parte}) |
+            @Html.ActionLink("Modificar", "Edit", new { id1 = item.ID_Proveedor, id2 = item.ID_Parte}) |
         </td>
     </tr>
 }

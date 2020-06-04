@@ -61,8 +61,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 db.Telefono.Add(telefono);
                 db.SaveChanges();
-                return RedirectToAction("Edit", new { Controller="Personas", id = telefono.Cedula });  
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { Controller="Personas", id = telefono.Cedula });  
             }
 
             ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre", telefono.Cedula);
@@ -102,7 +101,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             {
                 db.Entry(telefono).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { Controller = "Personas", id = telefono.Cedula });
             }
             ViewBag.Cedula = new SelectList(db.Persona, "Cedula", "nombre", telefono.Cedula);
             return View(telefono);

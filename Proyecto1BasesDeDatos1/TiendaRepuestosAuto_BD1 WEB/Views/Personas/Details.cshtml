@@ -65,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.NumeroDeTelefono)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { controller = "Telefonoes", id = item.ID_Telefono, Nombre = Model.nombre })
+                @Html.ActionLink("Modificar", "Edit", new { controller = "Telefonoes", id = item.ID_Telefono, Nombre = Model.nombre })
             </td>
         </tr>
     }
