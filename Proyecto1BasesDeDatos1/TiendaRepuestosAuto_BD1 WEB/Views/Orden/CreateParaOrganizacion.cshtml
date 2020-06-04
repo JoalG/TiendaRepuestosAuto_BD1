@@ -25,7 +25,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-               
+
             </div>
 
         </div>
@@ -68,6 +68,28 @@
             </div>
         </div>
     </div>
+    if (ViewBag.Message != null)
+    {
+        bool result = ViewBag.Resultado;
+
+        if (result)
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location.href = "/Orden/Index"
+            }
+            </script>
+        }
+        else
+        {
+            <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            }
+            </script>
+        }
+    }
 }
 
 <div>

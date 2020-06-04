@@ -128,10 +128,34 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (db.Cliente.Find(orden.ID_Cliente).ID_EstadoDeCliente == 0)
+                {
+                    db.spAddOrden(orden.ID_Cliente, orden.Fecha);
 
-                db.spAddOrden(orden.ID_Cliente, orden.Fecha);
+                    OrdenModel ordenModel = new OrdenModel
+                    {
+                        ID_Cliente = orden.ID_Cliente,
+                        Fecha = orden.Fecha
+                    };
+                    ViewBag.Resultado = true;
 
-                return RedirectToAction("Index");
+                    ViewBag.Message = "Se agregó correctamente la orden";
+                    ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
+                    return View(ordenModel);
+                }
+                else
+                {
+                    OrdenModel ordenModel = new OrdenModel
+                    {
+                        ID_Cliente = orden.ID_Cliente,
+                        Fecha = orden.Fecha
+                    };
+                    ViewBag.Resultado = false;
+
+                    ViewBag.Message = "No se puede agregar Orden - Cliente Suspendido o Inactivo";
+                    ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
+                    return View(ordenModel);
+                }
             }
 
             ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
@@ -148,10 +172,34 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (db.Cliente.Find(orden.ID_Cliente).ID_EstadoDeCliente == 0)
+                {
+                    db.spAddOrden(orden.ID_Cliente, orden.Fecha);
 
-                db.spAddOrden(orden.ID_Cliente, orden.Fecha);
+                    OrdenModel ordenModel = new OrdenModel
+                    {
+                        ID_Cliente = orden.ID_Cliente,
+                        Fecha = orden.Fecha
+                    };
+                    ViewBag.Resultado = true;
 
-                return RedirectToAction("Index");
+                    ViewBag.Message = "Se agregó correctamente la orden";
+                    ViewBag.ID_Cliente = new SelectList(db.Organizacion, "ID_Cliente", "Nombre");
+                    return View(ordenModel);
+                }
+                else
+                {
+                    OrdenModel ordenModel = new OrdenModel
+                    {
+                        ID_Cliente = orden.ID_Cliente,
+                        Fecha = orden.Fecha
+                    };
+                    ViewBag.Resultado = false;
+
+                    ViewBag.Message = "No se puede agregar Orden - Cliente Suspendido o Inactivo";
+                    ViewBag.ID_Cliente = new SelectList(db.Organizacion, "ID_Cliente", "Nombre");
+                    return View(ordenModel);
+                }
             }
 
             ViewBag.ID_Cliente = new SelectList(db.Organizacion, "ID_Cliente", "Nombre");
