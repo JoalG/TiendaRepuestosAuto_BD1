@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Persona</h4>
@@ -43,6 +43,12 @@
 
     </dl>
 </div>
+<p>
+    @Html.ActionLink("Regresar a lista", "Index") |
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.Cedula }) |
+    @Html.ActionLink("Agregar Telefono", "Create", new { controller = "Telefonoes", Cedula = Model.Cedula, nombre = Model.nombre })
+</p>
+
 
 <table class="table">
     <tr>
@@ -59,12 +65,9 @@
                 @Html.DisplayFor(modelItem => item.NumeroDeTelefono)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { controller = "Telefonoes", id = item.ID_Telefono, Nombre = Model.nombre})
+                @Html.ActionLink("Edit", "Edit", new { controller = "Telefonoes", id = item.ID_Telefono, Nombre = Model.nombre })
             </td>
         </tr>
     }
 </table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Cedula }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

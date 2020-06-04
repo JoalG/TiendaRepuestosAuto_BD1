@@ -4,7 +4,7 @@
     ViewBag.Title = "AsociarConTipoDeAutomovil";
 }
 
-<h2>Create</h2>
+<h2>Asociar Parte con tipo de automovil</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Proveido</h4>
     <hr />
 
 
@@ -44,7 +43,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Details", new { id = Model.ID_Parte })
 </div>
 
 @section Scripts {
