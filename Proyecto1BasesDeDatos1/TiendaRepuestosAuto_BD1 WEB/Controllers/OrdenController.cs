@@ -72,8 +72,27 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ID_Cliente = orden.ID_Cliente,
                 Fecha = orden.Fecha,
                 nombreDeCliente = getNombreFromClienteInOrden(orden.ID_Orden),
-                detalles = db.Detalle.Include(p => p.Parte).Include(p => p.Proveedor).Where(d => d.ID_Orden == orden.ID_Orden).ToList()
+                
             };
+            var detalles = db.Detalle.Include(p => p.Parte).Include(p => p.Proveedor).Where(d => d.ID_Orden == ordenModel.ID_Orden).ToList();
+
+            ordenModel.detalles = detalles;
+
+            decimal montoVenta = 0;
+            foreach (var item in detalles)
+            {
+                var proveido = db.Proveido.Find(item.ID_Proveedor, item.ID_Parte);
+                if(proveido != null)
+                {
+                    montoVenta += (proveido.Precio * item.Cantidad);
+                }
+            }
+            decimal montoIVA = (montoVenta / 100) * ordenModel.IVA;
+
+            ordenModel.montoVenta = montoVenta;
+            ordenModel.montoIVA = montoIVA;
+            ordenModel.montoTotal = montoVenta + montoIVA;
+
             return View(ordenModel);
         }
 

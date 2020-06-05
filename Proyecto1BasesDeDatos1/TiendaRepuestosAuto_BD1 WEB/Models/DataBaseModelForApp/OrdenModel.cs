@@ -20,5 +20,11 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
 
         public List<Detalle> detalles { get; set; }
 
+        public decimal montoVenta { get; set; }
+
+        public decimal montoIVA { get; set; }
+
+        public decimal montoTotal { get; set; }
+
     }
 }
