@@ -231,9 +231,36 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
                 TipoDeAutomovil tipo = db.TipoDeAutomovil.Find(parte.ID_TipoDeAutomovil);
                 db.spAssociateParteConTipoDeAutomovil(parte.ID_Parte, parte.ID_TipoDeAutomovil, tipo.ID_FabricanteDeAutos,result);
-                return RedirectToAction("Index");
+                if (result.Value.ToString() == "Record Inserted Successfully")
+                {
+                    ViewBag.Resultado = true;
+                }
+                else
+                {
+                    ViewBag.Resultado = false;
+                }
+                ViewBag.Message = result.Value.ToString();
+
+                var tipos = db.TipoDeAutomovil
+                    .Where(x => x.ID_TipoDeAutomovil == x.ID_TipoDeAutomovil)
+                    .Select(x => new
+                    {
+                        ID_TipoDeAutomovil = x.ID_TipoDeAutomovil,
+                        Name = x.Modelo + " - " + x.Año.ToString()
+                    });
+
+                ViewBag.ID_TipoDeAutomovil = new SelectList(tipos, "ID_TipoDeAutomovil", "Name");
+                return View(parte);
             }
-            
+            var tipos2 = db.TipoDeAutomovil
+                .Where(x => x.ID_TipoDeAutomovil == x.ID_TipoDeAutomovil)
+                .Select(x => new
+                {
+                    ID_TipoDeAutomovil = x.ID_TipoDeAutomovil,
+                    Name = x.Modelo + " - " + x.Año.ToString()
+                });
+
+            ViewBag.ID_TipoDeAutomovil = new SelectList(tipos2, "ID_TipoDeAutomovil", "Name");
             return View(parte);
         }
     }

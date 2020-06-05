@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using TiendaRepuestosAuto_BD1_WEB.Models;
@@ -51,14 +52,28 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Ganancia,Precio,ID_Proveedor,ID_Parte")] Proveido proveido)
+        public ActionResult Create(ParteRelacionProveedorModel proveido)
         {
             if (ModelState.IsValid)
             {
                 ObjectParameter result = new ObjectParameter("opReturn", typeof(string));
                 db.spAssociateParteConProveedor(proveido.ID_Parte, proveido.ID_Proveedor, proveido.Precio, 500000, result);
-                return RedirectToAction("Index");
-            }
+
+                if (result.Value.ToString() == "Record Inserted Successfully")
+                {
+                    ViewBag.Resultado = true;
+                }
+                else
+                {
+                    ViewBag.Resultado = false;
+                }
+
+                ViewBag.Message = result.Value.ToString();
+
+                ViewBag.ID_Parte = new SelectList(db.Parte, "ID_Parte", "Nombre");
+                ViewBag.ID_Proveedor = new SelectList(db.Proveedor, "ID_Proveedor", "Nombre");
+                return View(proveido);
+            };
 
             ViewBag.ID_Parte = new SelectList(db.Parte, "ID_Parte", "Nombre", proveido.ID_Parte);
             ViewBag.ID_Proveedor = new SelectList(db.Proveedor, "ID_Proveedor", "Nombre", proveido.ID_Proveedor);
@@ -96,14 +111,17 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Ganancia,Precio,ID_Proveedor,ID_Parte")] Proveido proveido)
+        public ActionResult Edit(ParteRelacionProveedorModel proveido)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(proveido).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                db.spModifyPrecioParteDeProvedor(proveido.ID_Parte, proveido.ID_Proveedor, proveido.Precio);
+
+                ViewBag.Message = "Modificacion realizada";
+                ViewBag.ID_Parte = new SelectList(db.Parte, "ID_Parte", "Nombre", proveido.ID_Parte);
+                ViewBag.ID_Proveedor = new SelectList(db.Proveedor, "ID_Proveedor", "Nombre", proveido.ID_Proveedor);
+                return View(proveido);
+            };
             ViewBag.ID_Parte = new SelectList(db.Parte, "ID_Parte", "Nombre", proveido.ID_Parte);
             ViewBag.ID_Proveedor = new SelectList(db.Proveedor, "ID_Proveedor", "Nombre", proveido.ID_Proveedor);
             return View(proveido);

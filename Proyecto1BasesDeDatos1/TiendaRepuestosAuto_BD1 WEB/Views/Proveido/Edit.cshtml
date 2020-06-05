@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Proveido</h4>
         <hr />
@@ -58,6 +58,17 @@
             </div>
         </div>
     </div>
+    if (ViewBag.Message != null)
+    {
+
+        <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+            window.location.href = "/Proveido/Index"
+        }
+        </script>
+
+    }
 }
 
 <div>
