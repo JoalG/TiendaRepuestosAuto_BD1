@@ -49,7 +49,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 ProveedorModel proveedor = new ProveedorModel
                 {
                     ID_Proveedor = item.ID_Proveedor,
-                    Nombre = item.Proveedor.Nombre
+                    Nombre = item.Proveedor.Nombre + "\t Precio: " + item.Precio*((item.Ganancia/100)+1)
                 };
                 proveedores.Add(proveedor);
             }
