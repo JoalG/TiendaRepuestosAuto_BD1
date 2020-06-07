@@ -40,7 +40,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 nombre = persona.nombre,
                 Ciudad = persona.Cliente.Ciudad,
                 Direccion = persona.Cliente.Direccion,
-                telefonos = telefonosL
+                telefonos = telefonosL,
+                ID_Cliente = persona.Cliente.ID_Cliente,
+                Estado = persona.Cliente.EstadoDeCliente.Tipo
             };
             if (persona == null)
             {
@@ -74,7 +76,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 */
                 //string result1 = "";
                 ObjectParameter result = new ObjectParameter("OpReturn",typeof(string));
-                db.spAddClienteAndPersona2(persona.Cedula, persona.nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, result);
+                db.spAddClienteAndPersona2(persona.Cedula, persona.nombre, cliente.Direccion, cliente.Ciudad, 0, result);
                 System.Diagnostics.Debug.WriteLine(result.ToString());
                 if(db.Persona.Find(persona.Cedula) != null)
                 {
@@ -132,7 +134,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 nombre = persona.nombre,
                 Ciudad = persona.Cliente.Ciudad,
                 Direccion = persona.Cliente.Direccion,
-                ID_EstadoDeCliente = persona.Cliente.ID_EstadoDeCliente
+                ID_EstadoDeCliente = persona.Cliente.ID_EstadoDeCliente,
+                ID_Cliente = persona.Cliente.ID_Cliente,
+                Estado = persona.Cliente.EstadoDeCliente.Tipo
             };
             return View(personaModel);
         }
@@ -203,22 +207,37 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             return true;
         }
 
-        public ActionResult suspenderPersona(int? id)
+        public ActionResult suspenderPersona(int? id, int? Cedula)
         {
             db.spSuspenderPersona(id);
+            if(Cedula != null)
+            {
+                Persona persona = db.Persona.Find(Cedula);
+                return RedirectToAction("Edit", new { id = Cedula });
+            }
             return RedirectToAction("Index");
         }
 
-        public ActionResult activarPersona(int? id)
+        public ActionResult activarPersona(int? id, int? Cedula)
         {
             db.spClienteSetActive(id);
+            if (Cedula != null)
+            {
+                Persona persona = db.Persona.Find(Cedula);
+                return RedirectToAction("Edit", new { id = Cedula });
+            }
             return RedirectToAction("Index");
 
         }
 
-        public ActionResult desactivarPersona(int? id)
+        public ActionResult desactivarPersona(int? id, int? Cedula)
         {
             db.spClienteSetInactive(id);
+            if (Cedula != null)
+            {
+                Persona persona = db.Persona.Find(Cedula);
+                return RedirectToAction("Edit", new { id = Cedula });
+            }
             return RedirectToAction("Index");
         }
     }
