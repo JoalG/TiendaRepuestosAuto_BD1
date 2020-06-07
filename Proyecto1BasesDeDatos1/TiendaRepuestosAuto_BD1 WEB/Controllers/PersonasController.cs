@@ -15,7 +15,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class PersonasController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
+        private TiendaRepuestosAuto_BD1Entities5 db = new TiendaRepuestosAuto_BD1Entities5();
 
         // GET: Personas
         public ActionResult Index(string Nombre, int? Cedula)
@@ -206,6 +206,19 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         public ActionResult suspenderPersona(int? id)
         {
             db.spSuspenderPersona(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult activarPersona(int? id)
+        {
+            db.spClienteSetActive(id);
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult desactivarPersona(int? id)
+        {
+            db.spClienteSetInactive(id);
             return RedirectToAction("Index");
         }
     }

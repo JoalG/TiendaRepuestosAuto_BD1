@@ -24,7 +24,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
         public string Nombre { get; set; }
         public long Telefono { get; set; }
         public string Cargo { get; set; }
-        public int CedulaJuridica { get; set; }
+        public long CedulaJuridica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Organizacion> Organizacion { get; set; }

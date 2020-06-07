@@ -13,7 +13,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class OrdenController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
+        private TiendaRepuestosAuto_BD1Entities5 db = new TiendaRepuestosAuto_BD1Entities5();
 
         // GET: Orden
         public ActionResult Index()
@@ -147,9 +147,21 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.Cliente.Find(orden.ID_Cliente).ID_EstadoDeCliente == 0)
+                Cliente cliente = db.Cliente.Find(orden.ID_Cliente);
+                if (cliente.ID_EstadoDeCliente != 2)
                 {
+                        
                     db.spAddOrden(orden.ID_Cliente, orden.Fecha);
+                    
+                    if(cliente.ID_EstadoDeCliente == 1)
+                    {
+                        db.spClienteSetActive(cliente.ID_Cliente);
+                        ViewBag.Message = "Se agregó correctamente la orden - El cliente ahora esta activo";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Se agregó correctamente la orden";
+                    }
 
                     OrdenModel ordenModel = new OrdenModel
                     {
@@ -158,7 +170,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                     };
                     ViewBag.Resultado = true;
 
-                    ViewBag.Message = "Se agregó correctamente la orden";
+                    
                     ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
                     return View(ordenModel);
                 }

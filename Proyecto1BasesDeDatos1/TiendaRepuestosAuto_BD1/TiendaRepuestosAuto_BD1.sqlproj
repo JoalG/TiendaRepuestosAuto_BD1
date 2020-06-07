@@ -82,6 +82,27 @@
     <Build Include="dbo\Stored Procedures\spAddPersonaOnly.sql" />
     <Build Include="dbo\Stored Procedures\spAddClienteAndPersona2.sql" />
     <Build Include="dbo\Stored Procedures\spAddClienteAndPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spSuspenderPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spSuspenderOrganizacion.sql" />
+    <Build Include="dbo\Stored Procedures\spModifyPrecioParteDeProvedor.sql" />
+    <Build Include="dbo\Stored Procedures\spModifyPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spModifyOrganizacion.sql" />
+    <Build Include="dbo\Stored Procedures\spGetOrdenesPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spGetOrdenesOrganizacion.sql" />
+    <Build Include="dbo\Stored Procedures\spFindTiposDeAutoMovilForParte.sql" />
+    <Build Include="dbo\Stored Procedures\spFindProveedorParaParte.sql" />
+    <Build Include="dbo\Stored Procedures\spFindPartePorModeloAño.sql" />
+    <Build Include="dbo\Stored Procedures\spFindNameCliente.sql" />
+    <Build Include="dbo\Stored Procedures\spEditTelefonoPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spClienteSetActive.sql" />
+    <Build Include="dbo\Stored Procedures\spBorrarParte.sql" />
+    <Build Include="dbo\Stored Procedures\spAssociateParteConTipoDeAutomovil.sql" />
+    <Build Include="dbo\Stored Procedures\spAssociateParteConProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\spAddTelefonoPersona.sql" />
+    <Build Include="dbo\Stored Procedures\spAddParte.sql" />
+    <Build Include="dbo\Stored Procedures\spAddOrden.sql" />
+    <Build Include="dbo\Stored Procedures\spAddDetalleOrden.sql" />
+    <Build Include="dbo\Stored Procedures\spAddClienteAndOrganizacion.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TiendaRepuestosAuto_BD1.refactorlog" />

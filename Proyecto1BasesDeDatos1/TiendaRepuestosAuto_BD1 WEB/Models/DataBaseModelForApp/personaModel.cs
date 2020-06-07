@@ -11,6 +11,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
     public class personaModel
     {
         [Display(Name = "Cédula")]
+        [Range(100000000, 999999999, ErrorMessage = "Número inválido")]
         [Required(ErrorMessage = "Tiene que ingresar su cédula")]
         public int Cedula { get; set; }
 

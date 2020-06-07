@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TiendaRepuestosAuto_BD1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -29,7 +29,7 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Telefono" Type="bigint" Nullable="false" />
           <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CedulaJuridica" Type="int" Nullable="false" />
+          <Property Name="CedulaJuridica" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Detalle">
           <Key>
@@ -76,7 +76,7 @@
           <Key>
             <PropertyRef Name="CedulaJuridica" />
           </Key>
-          <Property Name="CedulaJuridica" Type="int" Nullable="false" />
+          <Property Name="CedulaJuridica" Type="bigint" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="ID_Cliente" Type="int" Nullable="false" />
           <Property Name="ID_Contacto" Type="int" />
@@ -441,6 +441,17 @@
           <Parameter Name="Cargo" Type="nvarchar" Mode="In" />
           <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="spAddClienteAndOrganizacion2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CedulaJuridica" Type="bigint" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="nvarchar" Mode="In" />
+          <Parameter Name="ID_EstadoDeCliente" Type="int" Mode="In" />
+          <Parameter Name="NombreContacto" Type="nvarchar" Mode="In" />
+          <Parameter Name="Telefono" Type="bigint" Mode="In" />
+          <Parameter Name="Cargo" Type="nvarchar" Mode="In" />
+          <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="spAddClienteAndPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -477,11 +488,15 @@
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
           <Parameter Name="ID_ClientePersona" Type="int" Mode="In" />
         </Function>
+        <Function Name="spAddTelefonoPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="int" Mode="In" />
+          <Parameter Name="NumeroDeTelfono" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="spAssociateParteConProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_Parte" Type="int" Mode="In" />
           <Parameter Name="ID_Proveedor" Type="int" Mode="In" />
           <Parameter Name="Precio" Type="decimal" Mode="In" />
-          <Parameter Name="Ganancia" Type="int" Mode="In" />
+          <Parameter Name="Ganancia" Type="decimal" Mode="In" />
           <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="spAssociateParteConTipoDeAutomovil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -493,6 +508,17 @@
         <Function Name="spBorrarParte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_Parte" Type="int" Mode="In" />
           <Parameter Name="OpReturn" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spClienteSetActive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Cliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spClienteSetInactive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Cliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditTelefonoPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="int" Mode="In" />
+          <Parameter Name="NumeroDeTelfono" Type="bigint" Mode="In" />
+          <Parameter Name="NumeroDeTelfonoAnt" Type="bigint" Mode="In" />
         </Function>
         <Function Name="spFindNameCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_Cliente" Type="int" Mode="In" />
@@ -520,6 +546,16 @@
           <Parameter Name="Telefono" Type="bigint" Mode="In" />
           <Parameter Name="Cargo" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spModifyOrganizacion2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedulaJuridica" Type="bigint" Mode="In" />
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="nvarchar" Mode="In" />
+          <Parameter Name="ID_EstadoDeCliente" Type="int" Mode="In" />
+          <Parameter Name="NombreContacto" Type="nvarchar" Mode="In" />
+          <Parameter Name="Telefono" Type="bigint" Mode="In" />
+          <Parameter Name="Cargo" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spModifyPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedula" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="nvarchar" Mode="In" />
@@ -534,6 +570,9 @@
         </Function>
         <Function Name="spSuspenderOrganizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedulaJuridica" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSuspenderOrganizacion2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedulaJuridica" Type="bigint" Mode="In" />
         </Function>
         <Function Name="spSuspenderPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedula" Type="int" Mode="In" />
@@ -626,8 +665,7 @@
             <End Role="TelefonoProveedor" EntitySet="TelefonoProveedor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaRepuestosAuto_BD1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -659,7 +697,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Telefono" Type="Int64" Nullable="false" />
           <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CedulaJuridica" Type="Int32" Nullable="false" />
+          <Property Name="CedulaJuridica" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Organizacion" Relationship="Self.FK_Contacto_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
           <NavigationProperty Name="Organizacion1" Relationship="Self.FK_Organizacion" FromRole="Contacto" ToRole="Organizacion" />
         </EntityType>
@@ -716,7 +754,7 @@
           <Key>
             <PropertyRef Name="CedulaJuridica" />
           </Key>
-          <Property Name="CedulaJuridica" Type="Int32" Nullable="false" />
+          <Property Name="CedulaJuridica" Type="Int64" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
           <Property Name="ID_Contacto" Type="Int32" />
@@ -1059,7 +1097,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TiendaRepuestosAuto_BD1Entities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TiendaRepuestosAuto_BD1Entities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Contacto" EntityType="Self.Contacto" />
@@ -1223,11 +1261,15 @@
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="ID_ClientePersona" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spAddTelefonoPersona">
+            <Parameter Name="Cedula" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroDeTelfono" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="spAssociateParteConProveedor">
             <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
             <Parameter Name="ID_Proveedor" Mode="In" Type="Int32" />
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
-            <Parameter Name="Ganancia" Mode="In" Type="Int32" />
+            <Parameter Name="Ganancia" Mode="In" Type="Decimal" />
             <Parameter Name="OpReturn" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spAssociateParteConTipoDeAutomovil">
@@ -1240,6 +1282,14 @@
             <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
             <Parameter Name="OpReturn" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spClienteSetActive">
+          <Parameter Name="ID_Cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditTelefonoPersona">
+            <Parameter Name="Cedula" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroDeTelfono" Mode="In" Type="Int64" />
+            <Parameter Name="NumeroDeTelfonoAnt" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="spFindNameCliente">
             <Parameter Name="ID_Cliente" Mode="In" Type="Int32" />
             <Parameter Name="OpReturn" Mode="InOut" Type="String" />
@@ -1249,10 +1299,10 @@
             <Parameter Name="Año" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spFindProveedorParaParte" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spFindProveedorParaParte_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spFindTiposDeAutoMovilForParte" ReturnType="Collection(Int32)">
-            <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
+          <Parameter Name="ID_Parte" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetOrdenesOrganizacion" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spGetOrdenesOrganizacion_Result)" />
           <FunctionImport Name="spGetOrdenesPersona" ReturnType="Collection(TiendaRepuestosAuto_BD1Model.spGetOrdenesPersona_Result)" />
@@ -1279,10 +1329,37 @@
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spSuspenderOrganizacion">
-            <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
+          <Parameter Name="cedulaJuridica" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spSuspenderPersona">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAddClienteAndOrganizacion2">
+            <Parameter Name="CedulaJuridica" Mode="In" Type="Int64" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
+            <Parameter Name="ID_EstadoDeCliente" Mode="In" Type="Int32" />
+            <Parameter Name="NombreContacto" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="Int64" />
+            <Parameter Name="Cargo" Mode="In" Type="String" />
+            <Parameter Name="OpReturn" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModifyOrganizacion2">
+            <Parameter Name="cedulaJuridica" Mode="In" Type="Int64" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
+            <Parameter Name="ID_EstadoDeCliente" Mode="In" Type="Int32" />
+            <Parameter Name="NombreContacto" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="Int64" />
+            <Parameter Name="Cargo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spClienteSetInactive">
+            <Parameter Name="ID_Cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSuspenderOrganizacion2">
+            <Parameter Name="cedulaJuridica" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1325,7 +1402,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TiendaRepuestosAuto_BD1ModelStoreContainer" CdmEntityContainer="TiendaRepuestosAuto_BD1Entities4">
+        <EntityContainerMapping StorageEntityContainer="TiendaRepuestosAuto_BD1ModelStoreContainer" CdmEntityContainer="TiendaRepuestosAuto_BD1Entities5">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="TiendaRepuestosAuto_BD1Model.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
@@ -1529,9 +1606,12 @@
           <FunctionImportMapping FunctionImportName="spAddOrden" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddOrden" />
           <FunctionImportMapping FunctionImportName="spAddParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddParte" />
           <FunctionImportMapping FunctionImportName="spAddPersonaOnly" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddPersonaOnly" />
+          <FunctionImportMapping FunctionImportName="spAddTelefonoPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddTelefonoPersona" />
           <FunctionImportMapping FunctionImportName="spAssociateParteConProveedor" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAssociateParteConProveedor" />
           <FunctionImportMapping FunctionImportName="spAssociateParteConTipoDeAutomovil" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAssociateParteConTipoDeAutomovil" />
           <FunctionImportMapping FunctionImportName="spBorrarParte" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spBorrarParte" />
+          <FunctionImportMapping FunctionImportName="spClienteSetActive" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spClienteSetActive" />
+          <FunctionImportMapping FunctionImportName="spEditTelefonoPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spEditTelefonoPersona" />
           <FunctionImportMapping FunctionImportName="spFindNameCliente" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spFindNameCliente" />
           <FunctionImportMapping FunctionImportName="spFindPartePorModeloAño" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spFindPartePorModeloAño">
             <ResultMapping>
@@ -1579,6 +1659,10 @@
           <FunctionImportMapping FunctionImportName="spModifyPrecioParteDeProvedor" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyPrecioParteDeProvedor" />
           <FunctionImportMapping FunctionImportName="spSuspenderOrganizacion" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderOrganizacion" />
           <FunctionImportMapping FunctionImportName="spSuspenderPersona" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderPersona" />
+          <FunctionImportMapping FunctionImportName="spAddClienteAndOrganizacion2" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spAddClienteAndOrganizacion2" />
+          <FunctionImportMapping FunctionImportName="spModifyOrganizacion2" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spModifyOrganizacion2" />
+          <FunctionImportMapping FunctionImportName="spClienteSetInactive" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spClienteSetInactive" />
+          <FunctionImportMapping FunctionImportName="spSuspenderOrganizacion2" FunctionName="TiendaRepuestosAuto_BD1Model.Store.spSuspenderOrganizacion2" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

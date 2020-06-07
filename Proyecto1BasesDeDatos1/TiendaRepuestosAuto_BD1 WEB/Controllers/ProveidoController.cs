@@ -15,7 +15,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class ProveidoController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
+        private TiendaRepuestosAuto_BD1Entities5 db = new TiendaRepuestosAuto_BD1Entities5();
 
         // GET: Proveido
         public ActionResult Index(string NombreParte, string NombreProveedor)
@@ -57,7 +57,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter result = new ObjectParameter("opReturn", typeof(string));
-                db.spAssociateParteConProveedor(proveido.ID_Parte, proveido.ID_Proveedor, proveido.Precio, 500000, result);
+                db.spAssociateParteConProveedor(proveido.ID_Parte, proveido.ID_Proveedor, proveido.Precio, proveido.Ganancia, result);
 
                 if (result.Value.ToString() == "Record Inserted Successfully")
                 {

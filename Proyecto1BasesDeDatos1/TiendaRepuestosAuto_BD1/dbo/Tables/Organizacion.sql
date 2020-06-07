@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Organizacion]
 (
-	[CedulaJuridica] INT NOT NULL , 
+	[CedulaJuridica] BIGINT NOT NULL , 
     [Nombre] VARCHAR(150) NOT NULL,
     
     [ID_Cliente] INT NOT NULL, 

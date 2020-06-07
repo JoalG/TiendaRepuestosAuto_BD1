@@ -14,17 +14,17 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
 {
     public class OrganizacionController : Controller
     {
-        private TiendaRepuestosAuto_BD1Entities4 db = new TiendaRepuestosAuto_BD1Entities4();
+        private TiendaRepuestosAuto_BD1Entities5 db = new TiendaRepuestosAuto_BD1Entities5();
 
         // GET: Organizacion
-        public ActionResult Index(string Nombre, int? CedulaJuridica)
+        public ActionResult Index(string Nombre, long? CedulaJuridica)
         {
             var organizacions = db.Organizacion.Include(o => o.Cliente).Include(o => o.Contacto).Where(o => o.Nombre.StartsWith(Nombre) || Nombre == null).Where(o => o.CedulaJuridica.ToString().StartsWith(CedulaJuridica.ToString()) || CedulaJuridica == null);
             return View(organizacions.ToList());
         }
 
         // GET: Organizacion/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
@@ -57,7 +57,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter result = new ObjectParameter("opReturn", typeof(string));
-                db.spAddClienteAndOrganizacion(organizacion.CedulaJuridica, organizacion.Nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, contacto.Nombre, contacto.Telefono, contacto.Cargo, result);
+                db.spAddClienteAndOrganizacion2(organizacion.CedulaJuridica, organizacion.Nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, contacto.Nombre, contacto.Telefono, contacto.Cargo, result);
                 
                 OrganizacionModel organizacionModel = new OrganizacionModel
                 {
@@ -138,7 +138,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.spModifyOrganizacion(organizacion.CedulaJuridica,organizacion.Nombre,organizacion.Direccion,organizacion.Ciudad,organizacion.ID_EstadoDeCliente,organizacion.Contacto.Nombre,organizacion.Contacto.Telefono,organizacion.Contacto.Cargo);
+                db.spModifyOrganizacion2(organizacion.CedulaJuridica,organizacion.Nombre,organizacion.Direccion,organizacion.Ciudad,organizacion.ID_EstadoDeCliente,organizacion.Contacto.Nombre,organizacion.Contacto.Telefono,organizacion.Contacto.Cargo);
                 return RedirectToAction("Index");
             }
             return View(organizacion);
@@ -179,9 +179,22 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult suspenderOrganizacion(int? id)
+        public ActionResult suspenderOrganizacion(long? id)
         {
-            db.spSuspenderOrganizacion(id);
+            db.spSuspenderOrganizacion2(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult activarOrganizacion(int? id)
+        {
+            db.spClienteSetActive(id);
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult desactivarOrganizacion(int? id)
+        {
+            db.spClienteSetInactive(id);
             return RedirectToAction("Index");
         }
     }

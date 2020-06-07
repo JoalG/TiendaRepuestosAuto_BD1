@@ -4,7 +4,7 @@
     [Nombre] NVARCHAR(50) NOT NULL, 
     [Telefono] BIGINT NOT NULL, 
     [Cargo] NVARCHAR(50) NOT NULL, 
-    [CedulaJuridica] INT NOT NULL, 
+    [CedulaJuridica] BIGINT NOT NULL, 
     CONSTRAINT [FK_Organizacion] FOREIGN KEY ([CedulaJuridica]) REFERENCES [Organizacion]([CedulaJuridica]), 
     CONSTRAINT [PK_Contacto] PRIMARY KEY (ID_Contacto,CedulaJuridica) 
 

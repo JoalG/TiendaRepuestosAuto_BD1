@@ -15,10 +15,10 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TiendaRepuestosAuto_BD1Entities4 : DbContext
+    public partial class TiendaRepuestosAuto_BD1Entities5 : DbContext
     {
-        public TiendaRepuestosAuto_BD1Entities4()
-            : base("name=TiendaRepuestosAuto_BD1Entities4")
+        public TiendaRepuestosAuto_BD1Entities5()
+            : base("name=TiendaRepuestosAuto_BD1Entities5")
         {
         }
     
@@ -304,7 +304,20 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddPersonaOnly", cedulaParameter, nombreParameter, iD_ClientePersonaParameter);
         }
     
-        public virtual int spAssociateParteConProveedor(Nullable<int> iD_Parte, Nullable<int> iD_Proveedor, Nullable<decimal> precio, Nullable<int> ganancia, ObjectParameter opReturn)
+        public virtual int spAddTelefonoPersona(Nullable<int> cedula, Nullable<long> numeroDeTelfono)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(int));
+    
+            var numeroDeTelfonoParameter = numeroDeTelfono.HasValue ?
+                new ObjectParameter("NumeroDeTelfono", numeroDeTelfono) :
+                new ObjectParameter("NumeroDeTelfono", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddTelefonoPersona", cedulaParameter, numeroDeTelfonoParameter);
+        }
+    
+        public virtual int spAssociateParteConProveedor(Nullable<int> iD_Parte, Nullable<int> iD_Proveedor, Nullable<decimal> precio, Nullable<decimal> ganancia, ObjectParameter opReturn)
         {
             var iD_ParteParameter = iD_Parte.HasValue ?
                 new ObjectParameter("ID_Parte", iD_Parte) :
@@ -320,7 +333,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
     
             var gananciaParameter = ganancia.HasValue ?
                 new ObjectParameter("Ganancia", ganancia) :
-                new ObjectParameter("Ganancia", typeof(int));
+                new ObjectParameter("Ganancia", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAssociateParteConProveedor", iD_ParteParameter, iD_ProveedorParameter, precioParameter, gananciaParameter, opReturn);
         }
@@ -349,6 +362,32 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("ID_Parte", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spBorrarParte", iD_ParteParameter, opReturn);
+        }
+    
+        public virtual int spClienteSetActive(Nullable<int> iD_Cliente)
+        {
+            var iD_ClienteParameter = iD_Cliente.HasValue ?
+                new ObjectParameter("ID_Cliente", iD_Cliente) :
+                new ObjectParameter("ID_Cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spClienteSetActive", iD_ClienteParameter);
+        }
+    
+        public virtual int spEditTelefonoPersona(Nullable<int> cedula, Nullable<long> numeroDeTelfono, Nullable<long> numeroDeTelfonoAnt)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(int));
+    
+            var numeroDeTelfonoParameter = numeroDeTelfono.HasValue ?
+                new ObjectParameter("NumeroDeTelfono", numeroDeTelfono) :
+                new ObjectParameter("NumeroDeTelfono", typeof(long));
+    
+            var numeroDeTelfonoAntParameter = numeroDeTelfonoAnt.HasValue ?
+                new ObjectParameter("NumeroDeTelfonoAnt", numeroDeTelfonoAnt) :
+                new ObjectParameter("NumeroDeTelfonoAnt", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEditTelefonoPersona", cedulaParameter, numeroDeTelfonoParameter, numeroDeTelfonoAntParameter);
         }
     
         public virtual int spFindNameCliente(Nullable<int> iD_Cliente, ObjectParameter opReturn)
@@ -496,6 +535,98 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
                 new ObjectParameter("cedula", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderPersona", cedulaParameter);
+        }
+    
+        public virtual int spAddClienteAndOrganizacion2(Nullable<long> cedulaJuridica, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, string nombreContacto, Nullable<long> telefono, string cargo, ObjectParameter opReturn)
+        {
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("CedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("CedulaJuridica", typeof(long));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            var nombreContactoParameter = nombreContacto != null ?
+                new ObjectParameter("NombreContacto", nombreContacto) :
+                new ObjectParameter("NombreContacto", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(long));
+    
+            var cargoParameter = cargo != null ?
+                new ObjectParameter("Cargo", cargo) :
+                new ObjectParameter("Cargo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddClienteAndOrganizacion2", cedulaJuridicaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter, nombreContactoParameter, telefonoParameter, cargoParameter, opReturn);
+        }
+    
+        public virtual int spModifyOrganizacion2(Nullable<long> cedulaJuridica, string nombre, string direccion, string ciudad, Nullable<int> iD_EstadoDeCliente, string nombreContacto, Nullable<long> telefono, string cargo)
+        {
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("cedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("cedulaJuridica", typeof(long));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            var iD_EstadoDeClienteParameter = iD_EstadoDeCliente.HasValue ?
+                new ObjectParameter("ID_EstadoDeCliente", iD_EstadoDeCliente) :
+                new ObjectParameter("ID_EstadoDeCliente", typeof(int));
+    
+            var nombreContactoParameter = nombreContacto != null ?
+                new ObjectParameter("NombreContacto", nombreContacto) :
+                new ObjectParameter("NombreContacto", typeof(string));
+    
+            var telefonoParameter = telefono.HasValue ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(long));
+    
+            var cargoParameter = cargo != null ?
+                new ObjectParameter("Cargo", cargo) :
+                new ObjectParameter("Cargo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModifyOrganizacion2", cedulaJuridicaParameter, nombreParameter, direccionParameter, ciudadParameter, iD_EstadoDeClienteParameter, nombreContactoParameter, telefonoParameter, cargoParameter);
+        }
+    
+        public virtual int spClienteSetInactive(Nullable<int> iD_Cliente)
+        {
+            var iD_ClienteParameter = iD_Cliente.HasValue ?
+                new ObjectParameter("ID_Cliente", iD_Cliente) :
+                new ObjectParameter("ID_Cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spClienteSetInactive", iD_ClienteParameter);
+        }
+    
+        public virtual int spSuspenderOrganizacion2(Nullable<long> cedulaJuridica)
+        {
+            var cedulaJuridicaParameter = cedulaJuridica.HasValue ?
+                new ObjectParameter("cedulaJuridica", cedulaJuridica) :
+                new ObjectParameter("cedulaJuridica", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSuspenderOrganizacion2", cedulaJuridicaParameter);
         }
     }
 }

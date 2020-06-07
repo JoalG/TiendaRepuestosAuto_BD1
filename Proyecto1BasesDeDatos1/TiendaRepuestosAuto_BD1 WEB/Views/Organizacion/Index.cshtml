@@ -89,9 +89,11 @@
             @Html.DisplayFor(modelItem => item.Contacto.Cargo)
         </td>
         <td>
-            @Html.ActionLink("Modificar", "Edit", new { id=item.CedulaJuridica }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.CedulaJuridica }) |
-            @Html.ActionLink("Suspender", "suspenderOrganizacion", new { id=item.CedulaJuridica })
+            @Html.ActionLink("Modificar", "Edit", new { id = item.CedulaJuridica }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.CedulaJuridica }) |
+            @Html.ActionLink("Activar", "activarOrganizacion", new { id = item.Cliente.ID_Cliente }) |
+            @Html.ActionLink("Desactivar", "desactivarOrganizacion", new { id = item.Cliente.ID_Cliente }) | 
+            @Html.ActionLink("Suspender", "suspenderOrganizacion", new { id = item.CedulaJuridica })
         </td>
     </tr>
 }

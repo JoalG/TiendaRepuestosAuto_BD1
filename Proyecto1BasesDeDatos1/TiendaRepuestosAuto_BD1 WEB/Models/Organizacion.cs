@@ -20,7 +20,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models
             this.Contacto1 = new HashSet<Contacto>();
         }
     
-        public int CedulaJuridica { get; set; }
+        public long CedulaJuridica { get; set; }
         public string Nombre { get; set; }
         public int ID_Cliente { get; set; }
         public Nullable<int> ID_Contacto { get; set; }

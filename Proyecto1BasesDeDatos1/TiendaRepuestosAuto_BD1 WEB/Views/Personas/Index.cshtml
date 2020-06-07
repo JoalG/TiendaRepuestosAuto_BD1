@@ -79,6 +79,8 @@
             @Html.ActionLink("Detalles", "Details", new { id = item.Cedula })       |
         </td>
         <td>
+            @Html.ActionLink("Activar", "activarPersona", new { id = item.Cliente.ID_Cliente }) |
+            @Html.ActionLink("Desactivar", "desactivarPersona", new { id = item.Cliente.ID_Cliente }) |
             @Html.ActionLink("Suspender", "suspenderPersona", new { id = item.Cedula })
         </td>
     </tr>

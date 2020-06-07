@@ -9,8 +9,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
     public class OrganizacionModel
     {
         [Display(Name = "Cédula Juridica")]
+        [Range(1000000000, 9999999999, ErrorMessage = "Cédula Juridica inválida")]
         [Required(ErrorMessage = "Tiene que ingresar la cédula jurídica de la organización")]
-        public int CedulaJuridica { get; set; }
+        public long CedulaJuridica { get; set; }
 
         [Display(Name = "Nombre de Organización")]
         [MaxLength(50, ErrorMessage = "Nombre de la organización debe ser menor a 50 caracteres")]
