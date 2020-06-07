@@ -33,5 +33,9 @@ namespace TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp
 
         public ContactoModel Contacto { get; set; }
 
+        public int ID_Cliente { get; set; }
+
+        public string Estado { get; set; }
+
     }
 }

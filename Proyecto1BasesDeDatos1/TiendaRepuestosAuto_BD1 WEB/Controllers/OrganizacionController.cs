@@ -57,7 +57,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             if (ModelState.IsValid)
             {
                 ObjectParameter result = new ObjectParameter("opReturn", typeof(string));
-                db.spAddClienteAndOrganizacion2(organizacion.CedulaJuridica, organizacion.Nombre, cliente.Direccion, cliente.Ciudad, cliente.ID_EstadoDeCliente, contacto.Nombre, contacto.Telefono, contacto.Cargo, result);
+                db.spAddClienteAndOrganizacion2(organizacion.CedulaJuridica, organizacion.Nombre, cliente.Direccion, cliente.Ciudad, 0, contacto.Nombre, contacto.Telefono, contacto.Cargo, result);
                 
                 OrganizacionModel organizacionModel = new OrganizacionModel
                 {
@@ -116,6 +116,8 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 Ciudad = organizacion.Cliente.Ciudad,
                 Direccion = organizacion.Cliente.Direccion,
                 ID_EstadoDeCliente = organizacion.Cliente.ID_EstadoDeCliente,
+                ID_Cliente = organizacion.Cliente.ID_Cliente,
+                Estado = organizacion.Cliente.EstadoDeCliente.Tipo,
                 Contacto = new ContactoModel
                 {
                     Nombre = organizacion.Contacto.Nombre,
@@ -179,22 +181,34 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult suspenderOrganizacion(long? id)
+        public ActionResult suspenderOrganizacion(long? id, long? CedulaJuridica)
         {
             db.spSuspenderOrganizacion2(id);
+            if (CedulaJuridica != null)
+            {
+                return RedirectToAction("Edit", new { id = CedulaJuridica });
+            }
             return RedirectToAction("Index");
         }
 
-        public ActionResult activarOrganizacion(int? id)
+        public ActionResult activarOrganizacion(int? id, long? CedulaJuridica)
         {
             db.spClienteSetActive(id);
+            if (CedulaJuridica != null)
+            {
+                return RedirectToAction("Edit", new { id = CedulaJuridica });
+            }
             return RedirectToAction("Index");
 
         }
 
-        public ActionResult desactivarOrganizacion(int? id)
+        public ActionResult desactivarOrganizacion(int? id, long? CedulaJuridica)
         {
             db.spClienteSetInactive(id);
+            if (CedulaJuridica != null)
+            {
+                return RedirectToAction("Edit", new { id = CedulaJuridica });
+            }
             return RedirectToAction("Index");
         }
     }
