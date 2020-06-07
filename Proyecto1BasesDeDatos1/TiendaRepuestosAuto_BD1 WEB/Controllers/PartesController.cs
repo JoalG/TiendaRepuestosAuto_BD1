@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using TiendaRepuestosAuto_BD1_WEB.Models;
 using TiendaRepuestosAuto_BD1_WEB.Models.DataBaseModelForApp;
 
@@ -172,9 +173,18 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            Parte parte = db.Parte.Find(id);
+            Parte parteBorrar = new Parte
+            {
+                ID_Parte = parte.ID_Parte,
+                FabricanteDePiezas = parte.FabricanteDePiezas,
+                Marca = parte.Marca,
+                Nombre = parte.Nombre,
+            };
             ObjectParameter result = new ObjectParameter("OpReturn", typeof(string));
             db.spBorrarParte(id, result);
-            return RedirectToAction("Index");
+            ViewBag.Message = result.Value.ToString();
+            return View(parteBorrar);
         }
 
         protected override void Dispose(bool disposing)
