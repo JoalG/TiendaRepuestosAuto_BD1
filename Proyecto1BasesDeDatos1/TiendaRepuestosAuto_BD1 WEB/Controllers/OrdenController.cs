@@ -84,7 +84,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                 var proveido = db.Proveido.Find(item.ID_Proveedor, item.ID_Parte);
                 if(proveido != null)
                 {
-                    montoVenta += (proveido.Precio * item.Cantidad);
+                    montoVenta += (proveido.Precio * item.Cantidad)*(1+(proveido.Ganancia/100));
                 }
             }
             decimal montoIVA = (montoVenta / 100) * ordenModel.IVA;
@@ -183,7 +183,7 @@ namespace TiendaRepuestosAuto_BD1_WEB.Controllers
                     };
                     ViewBag.Resultado = false;
 
-                    ViewBag.Message = "No se puede agregar Orden - Cliente Suspendido o Inactivo";
+                    ViewBag.Message = "No se puede agregar Orden - Cliente Suspendido";
                     ViewBag.ID_Cliente = new SelectList(db.Persona, "ID_ClientePersona", "Nombre");
                     return View(ordenModel);
                 }
